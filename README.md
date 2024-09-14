@@ -1,37 +1,10 @@
 ![Flixclusive logo](https://i.imgur.com/tizcKbi.png)
 
-<div>
-  <table>
-    <tr>
-      <td>CI Build</td>
-      <td><a href="https://github.com/flixclusiveorg/Flixclusive/actions/workflows/Build.yml"><img src="https://img.shields.io/github/actions/workflow/status/flixclusiveorg/Flixclusive/Build.yml?label=CI+Build&style=for-the-badge" alt="CI"></a></td>
-    </tr>
-    <tr>
-      <td>Quality Gate</td>
-      <td><a href="https://sonarcloud.io/summary/overall?id=flixclusiveorg_Flixclusive"><img src="https://img.shields.io/sonar/quality_gate/flixclusiveorg_Flixclusive?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge" alt="Sonar quality gate"></a></td>
-    </tr>
-    <tr>
-      <td>Pre-release</td>
-      <td><a href="https://github.com/flixclusiveorg/Flixclusive/releases/pre-release"><img src="https://img.shields.io/github/downloads/flixclusiveorg/Flixclusive/pre-release/total?style=for-the-badge" alt="pre-release build"></a></td>
-    </tr>
-    <tr>
-      <td>Stable</td>
-      <td><a href="https://github.com/flixclusiveorg/Flixclusive/releases/latest"><img src="https://img.shields.io/github/downloads/flixclusiveorg/Flixclusive/latest/total?style=for-the-badge" alt="stable release"></a></td>
-    </tr>
-    <tr>
-      <td>Discord</td>
-      <td><a href="https://discord.gg/7yPSPveReu"><img src="https://img.shields.io/discord/1255770492049162240?label=discord&labelColor=7289da&color=2c2f33&style=for-the-badge" alt="Discord"></a></td>
-    </tr>
-  </table>
-</div>
+## Provider stubs and utilities
 
-## Disclaimer
-The app **DOES NOT** host and contain movies and tv shows streaming links!
+Most data classes, models or entities can be found here.
 
-## Roadmap
-- Join the discord; its in there! 🥦
-
-## Contributors
-<a href="https://github.com/flixclusiveorg/Flixclusive/graphs/contributors">
-  <img width="80" src="https://contrib.rocks/image?repo=flixclusiveorg/Flixclusive"  alt="Contributors"/>
-</a>
+- [:core-util](./core-util) - contains most of utility and common tools that can be used in the app and providers. 
+- [:model-film](./model-film) - contains all model classes that can be considered as stream media (film or shows).
+- [:model-provider](./model-provider) - contains all the model stubs that will be used on both compilation and runtime of providers.
+- [:provider](./provider) - contains all provider stubs such as [Provider](./provider/src/main/kotlin/com/flixclusive/provider/Provider.kt), [ProviderApi](./provider/src/main/kotlin/com/flixclusive/provider/ProviderApi.kt), and [ProviderWebView](./provider/src/main/kotlin/com/flixclusive/provider/webview/ProviderWebView.kt).
