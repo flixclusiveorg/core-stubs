@@ -68,6 +68,8 @@ subprojects {
                 )
             )
 
+            includes.from("README.md")
+
             reportUndocumented.set(true)
             // failOnWarning.set(true)
 
