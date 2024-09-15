@@ -2,8 +2,6 @@
 
 This contains all model/entity classes that are used by the provider system. This mainly includes media and provider information entities.
 
----
-
 ## Use as a dependency
 
 **Step 1.** Add the JitPack repository to your build file

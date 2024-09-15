@@ -11,8 +11,6 @@ Here are the utility packages, grouped by their responsibilities:
 - network - contains all network utilities such as response handling and QoL code for HTTP requests.
 - webview - contains the main base WebView used all through out the app.
 
----
-
 ## Use as a dependency
 
 **Step 1.** Add the JitPack repository to your build file

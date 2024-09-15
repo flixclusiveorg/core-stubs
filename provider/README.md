@@ -3,8 +3,6 @@
 This contains all provider stubs that are used to create a custom provider. The best place to start with is [Provider](com.flixclusive.provider.Provider) and
 [ProviderApi](com.flixclusive.provider.ProviderApi)
 
----
-
 ## Use as a dependency
 
 **Step 1.** Add the JitPack repository to your build file

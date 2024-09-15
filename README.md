@@ -9,8 +9,6 @@ Most data classes, models or entities can be found here.
 - [:model-provider](./model-provider) - contains all the model stubs that will be used on both compilation and runtime of providers.
 - [:provider](./provider) - contains all provider stubs such as [Provider](./provider/src/main/kotlin/com/flixclusive/provider/Provider.kt), [ProviderApi](./provider/src/main/kotlin/com/flixclusive/provider/ProviderApi.kt), and [ProviderWebView](./provider/src/main/kotlin/com/flixclusive/provider/webview/ProviderWebView.kt).
 
----
-
 To use _all_ of the modules:
 
 **Step 1.** Add the JitPack repository to your build file

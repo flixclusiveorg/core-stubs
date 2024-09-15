@@ -7,7 +7,6 @@ In this package, all media content instances extends the abstract [**Film**](com
 
 **FilmDetails** class is a parent class of both [**Movie**](com.flixclusive.model.film.Movie) and
 [**TvShow**](com.flixclusive.model.film.TvShow) while **FilmSearchItem** is a single final class only of every search media item results.
----
 
 ## Use as a dependency
 
