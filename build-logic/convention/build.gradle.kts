@@ -26,6 +26,10 @@ gradlePlugin {
      * Register convention plugins so they are available in the build scripts of the application
      */
     plugins {
+        register("flixclusiveKotlinLibrary") {
+            id = "flixclusive.kotlin.library"
+            implementationClass = "KotlinLibraryConventionPlugin"
+        }
         register("flixclusiveAndroidLibrary") {
             id = "flixclusive.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"

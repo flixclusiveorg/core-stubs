@@ -19,6 +19,12 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(commonExtension = this)
+
+                publishing {
+                    singleVariant("release") {
+                        withSourcesJar()
+                    }
+                }
             }
 
             dependencies {

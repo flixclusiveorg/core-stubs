@@ -33,17 +33,9 @@ fun Project.android(configuration: LibraryExtension.() -> Unit)
 
 subprojects {
     group = "com.github.flixclusive"
-    version = "1.0.1"
+    version = "1.0.2"
 
     afterEvaluate {
-        android {
-            publishing {
-                singleVariant("release") {
-                    withSourcesJar()
-                }
-            }
-        }
-
         publishing {
             repositories {
                 mavenLocal()
@@ -52,7 +44,11 @@ subprojects {
             publications {
                 register<MavenPublication>("release") {
                     afterEvaluate {
-                        from(components["release"])
+                        if (plugins.hasPlugin("com.android.library")) {
+                            from(components["release"])
+                        } else {
+                            from(components["java"])
+                        }
                     }
                 }
             }

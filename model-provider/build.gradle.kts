@@ -1,9 +1,5 @@
 plugins {
-    alias(libs.plugins.flixclusive.library)
-}
-
-android {
-    namespace = "com.flixclusive.model.provider"
+    alias(libs.plugins.flixclusive.kotlin.library)
 }
 
 dependencies {

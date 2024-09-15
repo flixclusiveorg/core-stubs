@@ -1,11 +1,7 @@
 package com.flixclusive.model.film.util
 
-import android.os.Build
 import com.flixclusive.model.film.FilmSearchItem
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatterBuilder
-import java.time.format.DateTimeParseException
 import java.util.Calendar
 import java.util.Locale
 import java.util.regex.Pattern
@@ -37,25 +33,11 @@ fun isDateInFuture(dateString: String): Boolean {
         "yyyy-MM-dd"
     } else ""
 
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val date = try {
-            LocalDate.parse(dateString)
-        } catch (e: DateTimeParseException) {
-            val formatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendPattern(format)
-                .toFormatter(locale)
+    val formatter = SimpleDateFormat(format, locale)
+    val currentDate = Calendar.getInstance().time
+    val date = formatter.parse(dateString)
 
-            LocalDate.parse(dateString, formatter)
-        }
-
-        date.isAfter(LocalDate.now())
-    } else {
-        val formatter = SimpleDateFormat(format, locale)
-        val currentDate = Calendar.getInstance().time
-        val date = formatter.parse(dateString)
-        date?.after(currentDate) ?: false
-    }
+    return date?.after(currentDate) ?: false
 }
 
 /**

@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.flixclusive.library)
+    alias(libs.plugins.flixclusive.android.library)
 }
 
 android {

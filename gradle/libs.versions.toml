@@ -58,4 +58,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 # Plugins defined by this project
 flixclusive-compose = { id = "flixclusive.compose", version = "unspecified" }
-flixclusive-library = { id = "flixclusive.android.library", version = "unspecified" }
+flixclusive-android-library = { id = "flixclusive.android.library", version = "unspecified" }
+flixclusive-kotlin-library = { id = "flixclusive.kotlin.library", version = "unspecified" }
