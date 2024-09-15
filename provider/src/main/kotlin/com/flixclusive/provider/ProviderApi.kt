@@ -3,12 +3,6 @@ package com.flixclusive.provider
 import android.content.Context
 import android.webkit.WebView
 import androidx.annotation.MainThread
-import com.flixclusive.provider.filter.Filter
-import com.flixclusive.provider.filter.FilterList
-import com.flixclusive.model.provider.link.MediaLink
-import com.flixclusive.model.provider.ProviderCatalog
-import com.flixclusive.model.provider.link.Stream
-import com.flixclusive.model.provider.link.Subtitle
 import com.flixclusive.model.film.Film
 import com.flixclusive.model.film.FilmDetails
 import com.flixclusive.model.film.FilmSearchItem
@@ -16,6 +10,12 @@ import com.flixclusive.model.film.Movie
 import com.flixclusive.model.film.SearchResponseData
 import com.flixclusive.model.film.TvShow
 import com.flixclusive.model.film.common.tv.Episode
+import com.flixclusive.model.provider.ProviderCatalog
+import com.flixclusive.model.provider.link.MediaLink
+import com.flixclusive.model.provider.link.Stream
+import com.flixclusive.model.provider.link.Subtitle
+import com.flixclusive.provider.filter.Filter
+import com.flixclusive.provider.filter.FilterList
 import com.flixclusive.provider.util.DefaultTestFilm.getDefaultTestFilm
 import com.flixclusive.provider.webview.ProviderWebView
 import okhttp3.OkHttpClient
@@ -23,9 +23,9 @@ import okhttp3.OkHttpClient
 /**
  * The base class for every provider api.
  *
- * An api will provide source links for a given film. It could also be used to search for films and retrieve detailed information about them.
+ * An api will provide content based on configurations. It could also be used to search for films and retrieve detailed information about them.
  *
- * @property client The [OkHttpClient] instance used for network requests.
+ * @property client The dirty [OkHttpClient] instance used for network requests.
  * @property provider The [Provider] object representing the provider's information.
  *
  * @property baseUrl The base URL used for network requests. Defaults to an empty string.
@@ -111,7 +111,7 @@ abstract class ProviderApi(
  *
  * An api will provide source links for a given film. It could also be used to search for films and retrieve detailed information about them.
  *
- * @property client The [OkHttpClient] instance used for network requests.
+ * @property client The dirty [OkHttpClient] instance used for network requests.
  * @property provider The [Provider] object representing the provider's information.
  *
  * @property baseUrl The base URL used for network requests. Defaults to an empty string.
