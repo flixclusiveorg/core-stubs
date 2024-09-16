@@ -1,0 +1,265 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DoHProvider</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../index.html">
+                            Provider API Reference
+                    </a>            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":core-util:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="core-util::com.flixclusive.core.util.network/DoHProvider///PointingToDeclaration//-81746251">
+  <div class="breadcrumbs"><a href="../../index.html">core-util</a><span class="delimiter">/</span><a href="../index.html">com.flixclusive.core.util.network</a><span class="delimiter">/</span><span class="current">DoHProvider</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Do</span><wbr><span><span>HProvider</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">DoHProvider</a></div><p class="paragraph">DNS Providers</p><ul><li><p class="paragraph">Cloudflare</p></li><li><p class="paragraph">Google</p></li><li><p class="paragraph">AdGuard</p></li><li><p class="paragraph">Quad9</p></li><li><p class="paragraph">AliDNS</p></li><li><p class="paragraph">DNSPod</p></li><li><p class="paragraph">360</p></li><li><p class="paragraph">Quad101</p></li><li><p class="paragraph">Mullvad</p></li><li><p class="paragraph">Control D</p></li><li><p class="paragraph">Najalla</p></li><li><p class="paragraph">SheCan</p></li></ul></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="424504042%2FFunctions%2F-81746251" anchor-label="doh360" id="424504042%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh360.html"><span><span>doh360</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="424504042%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh360.html"><span class="token function">doh360</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with 360 DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1616912235%2FFunctions%2F-81746251" anchor-label="dohAdGuard" id="-1616912235%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-ad-guard.html"><span>doh</span><wbr><span>Ad</span><wbr><span><span>Guard</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1616912235%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-ad-guard.html"><span class="token function">dohAdGuard</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with AdGuard DNS. AdGuard "Default" DNS works too but for the sake of making sure no site is blacklisted, we use "Unfiltered"</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1665872878%2FFunctions%2F-81746251" anchor-label="dohAliDNS" id="1665872878%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-ali-d-n-s.html"><span>doh</span><wbr><span>Ali</span><wbr><span><span>DNS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1665872878%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-ali-d-n-s.html"><span class="token function">dohAliDNS</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with Ali DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-816398304%2FFunctions%2F-81746251" anchor-label="dohCloudflare" id="-816398304%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-cloudflare.html"><span>doh</span><wbr><span><span>Cloudflare</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-816398304%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-cloudflare.html"><span class="token function">dohCloudflare</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with Cloudflare DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="431398226%2FFunctions%2F-81746251" anchor-label="dohControlD" id="431398226%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-control-d.html"><span>doh</span><wbr><span>Control</span><wbr><span><span>D</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="431398226%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-control-d.html"><span class="token function">dohControlD</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Control D unfiltered option Source : https://controld.com/free-dns/?</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-181836067%2FFunctions%2F-81746251" anchor-label="dohDNSPod" id="-181836067%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-d-n-s-pod.html"><span>doh</span><wbr><span><span>DNSPod</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-181836067%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-d-n-s-pod.html"><span class="token function">dohDNSPod</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with DNS Pod</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="671855904%2FFunctions%2F-81746251" anchor-label="dohGoogle" id="671855904%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-google.html"><span>doh</span><wbr><span><span>Google</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="671855904%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-google.html"><span class="token function">dohGoogle</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with Google DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1791699782%2FFunctions%2F-81746251" anchor-label="dohMullvad" id="1791699782%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-mullvad.html"><span>doh</span><wbr><span><span>Mullvad</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1791699782%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-mullvad.html"><span class="token function">dohMullvad</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Mullvad DoH without ad blocking option Source : https://mullvad.net/en/help/dns-over-https-and-dns-over-tls/</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-678275200%2FFunctions%2F-81746251" anchor-label="dohNajalla" id="-678275200%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-najalla.html"><span>doh</span><wbr><span><span>Najalla</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-678275200%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-najalla.html"><span class="token function">dohNajalla</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Njalla Non logging and uncensored</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-674811604%2FFunctions%2F-81746251" anchor-label="dohQuad101" id="-674811604%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-quad101.html"><span>doh</span><wbr><span><span>Quad101</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-674811604%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-quad101.html"><span class="token function">dohQuad101</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with Quad101 DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="991454917%2FFunctions%2F-81746251" anchor-label="dohQuad9" id="991454917%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-quad9.html"><span>doh</span><wbr><span><span>Quad9</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="991454917%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-quad9.html"><span class="token function">dohQuad9</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Returns a new OkHttpClient.Builder with Quad9 DNS</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1761512263%2FFunctions%2F-81746251" anchor-label="dohSheCan" id="-1761512263%2FFunctions%2F-81746251" data-filterable-set=":core-util:dokkaHtmlPartial/release"></a>
+          <div class="table-row" data-filterable-current=":core-util:dokkaHtmlPartial/release" data-filterable-set=":core-util:dokkaHtmlPartial/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="doh-she-can.html"><span>doh</span><wbr><span>She</span><wbr><span><span>Can</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1761512263%2FFunctions%2F-81746251"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core-util:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span><span class="token punctuation">.</span><a href="doh-she-can.html"><span class="token function">dohSheCan</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="okhttp3/OkHttpClient.Builder///PointingToDeclaration/">OkHttpClient.Builder</span></div><div class="brief "><p class="paragraph">Source: https://shecan.ir/</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

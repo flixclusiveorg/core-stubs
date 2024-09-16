@@ -1,0 +1,186 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>provider</title>
+<link href="../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script>
+<link href="../styles/style.css" rel="Stylesheet">
+<link href="../styles/main.css" rel="Stylesheet">
+<link href="../styles/prism.css" rel="Stylesheet">
+<link href="../styles/logo-styles.css" rel="Stylesheet">
+<link href="../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../scripts/main.js" defer></script>
+<script type="text/javascript" src="../scripts/prism.js" async></script>
+<script type="text/javascript" src="../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../index.html">
+                            Provider API Reference
+                    </a>            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":provider:dokkaHtmlPartial/release">androidJvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" id="content" pageids="provider::////PointingToDeclaration//-317512894">
+  <div class="breadcrumbs"></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>provider</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":provider:dokkaHtmlPartial/release"><p class="paragraph">This contains all provider stubs that are used to create a custom provider. The best place to start with is <a href="com.flixclusive.provider/-provider/index.html">Provider</a> and <a href="com.flixclusive.provider/-provider-api/index.html">ProviderApi</a></p><h2 class="">Use as a dependency</h2><p class="paragraph"><strong>Step 1.</strong> Add the JitPack repository to your build file</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencyResolutionManagement {<br>    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)<br>    repositories {<br>        // other repositories here...<br>        mavenCentral()<br>        maven {<br>            url = uri("https://jitpack.io") // &lt;-- add this<br>        }<br>    }<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph"><strong>Step 2.</strong> Add the dependency</p><p class="paragraph"><i>The latest version can be found here: </i><a href="https://github/com/flixclusiveorg/core-stubs/releases"><i>latest tag</i></a></p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {<br>    implementation("com.github.flixclusiveorg.core-stubs:provider:$LATEST_CORE_STUBS_VERSION")<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+  <h2 class="">Packages</h2>
+  <div class="table"><a data-name="354735666%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider" id="354735666%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider/index.html">com.flixclusive.provider</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="354735666%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1662991464%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider.extractor" id="1662991464%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider.extractor/index.html">com.flixclusive.provider.extractor</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1662991464%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1361080120%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider.filter" id="1361080120%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider.filter/index.html">com.flixclusive.provider.filter</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1361080120%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-499396445%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider.settings" id="-499396445%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider.settings/index.html">com.flixclusive.provider.settings</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-499396445%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-302040382%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider.util" id="-302040382%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider.util/index.html">com.flixclusive.provider.util</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-302040382%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="1151371901%2FPackages%2F-317512894" anchor-label="com.flixclusive.provider.webview" id="1151371901%2FPackages%2F-317512894" data-filterable-set=":provider:dokkaHtmlPartial/release"></a>
+    <div class="table-row" data-filterable-current=":provider:dokkaHtmlPartial/release" data-filterable-set=":provider:dokkaHtmlPartial/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="com.flixclusive.provider.webview/index.html">com.flixclusive.provider.webview</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1151371901%2FPackages%2F-317512894"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">androidJvm</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
