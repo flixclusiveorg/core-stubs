@@ -1,6 +1,8 @@
 package com.flixclusive.model.provider
 
 import kotlinx.serialization.Serializable
+import java.security.MessageDigest
+import kotlin.random.Random
 
 /**
  * Represents the data associated with a provider.
@@ -42,19 +44,15 @@ data class ProviderData(
     val providerType: ProviderType,
     val status: Status,
 ) {
-    val id: String
-        get() {
-            val repositoryName = if (repositoryUrl != null) {
-                "-" + getRepositoryNameFromUrl(repositoryUrl)
-            } else ""
+    val id = generateHash()
 
-            return "$name$repositoryName-$versionCode"
-        }
+    private fun generateHash(): String {
+        val uniqueHashCode = "${hashCode()}".toByteArray() + Random(System.currentTimeMillis()).nextBytes(30)
 
-    private fun getRepositoryNameFromUrl(url: String): String {
-        val regex = "github\\.com/[^/]+/([^/]+)".toRegex()
-        val matchResult = regex.find(url)
-
-        return matchResult?.groups?.get(1)?.value ?: url
+        val digest = MessageDigest.getInstance("SHA-1")
+        val hashBytes = digest.digest(uniqueHashCode)
+        return hashBytes.toHexString().take(15)
     }
+
+    private fun ByteArray.toHexString(): String = joinToString("") { "%02x".format(it) }
 }
