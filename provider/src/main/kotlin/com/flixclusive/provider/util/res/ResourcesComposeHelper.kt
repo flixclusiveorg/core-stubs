@@ -84,7 +84,10 @@ fun painterResource(name: String, packageName: String): Painter {
     val path = value.string
 
     return if (path?.endsWith(".xml") == true) {
-        val imageVector = ImageVector.vectorResource(id)
+        val imageVector = remember(id, res, res.configuration) {
+            ImageVector.vectorResource(null, res, id)
+        }
+
         rememberVectorPainter(imageVector)
     } else {
         // Otherwise load the bitmap resource
@@ -95,6 +98,7 @@ fun painterResource(name: String, packageName: String): Painter {
                 throw ResourceResolutionException("Error attempting to load resource: $path", exception)
             }
         }
+
         BitmapPainter(imageBitmap)
     }
 }
