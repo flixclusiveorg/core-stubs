@@ -21,6 +21,7 @@ retrofit = "2.9.0"
 # Android
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 
 # Jsoup
