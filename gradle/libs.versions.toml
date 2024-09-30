@@ -1,7 +1,7 @@
 [versions]
 agp = "8.2.0"
 compileSdk = "34"
-composeBom = "2024.06.00"
+composeBom = "2024.09.02"
 composeCompiler = "1.5.3"
 core = "1.13.1"
 coroutines = "1.7.3"
