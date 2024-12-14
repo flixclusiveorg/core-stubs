@@ -28,6 +28,8 @@ data class DBFilm(
     override val rating: Double? = null,
     override val customProperties: Map<String, String?> = emptyMap(),
 ) : Film(), Serializable
+// TODO: Remove ouf of the library
+
 
 /**
  * Converts a [Film] to a [DBFilm].
