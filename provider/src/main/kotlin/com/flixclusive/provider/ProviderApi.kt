@@ -38,6 +38,17 @@ abstract class ProviderApi(
     val client: OkHttpClient,
     val provider: Provider
 ) {
+    constructor(
+        client: OkHttpClient = OkHttpClient()
+    ) : this(
+        client = client,
+        provider = object : Provider() {
+            override fun getApi(context: Context, client: OkHttpClient): ProviderApi {
+                throw IllegalAccessException("This is a stub class and should not be used directly.")
+            }
+        }
+    )
+
     open val baseUrl: String = ""
     open val testFilm: FilmDetails = getDefaultTestFilm()
     open val filters: FilterList get() = FilterList()
