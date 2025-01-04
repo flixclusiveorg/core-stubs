@@ -66,7 +66,7 @@ enum class AppDispatchers(
          * @see launchOnIO
          * */
         suspend inline fun <T> withIOContext(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = withContext(IO.dispatcher) {
             block()
         }
@@ -80,7 +80,7 @@ enum class AppDispatchers(
          * @see launchOnDefault
          * */
         suspend inline fun <T> withDefaultContext(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = withContext(Default.dispatcher) {
             block()
         }
@@ -94,7 +94,7 @@ enum class AppDispatchers(
          * @see launchOnMain
          * */
         suspend inline fun <T> withMainContext(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = withContext(Main.dispatcher) {
             block()
         }
@@ -108,7 +108,7 @@ enum class AppDispatchers(
          * @see launchOnIO
          * */
         inline fun <T> runOnIO(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = runBlocking(IO.dispatcher) {
             block()
         }
@@ -122,7 +122,7 @@ enum class AppDispatchers(
          * @see launchOnDefault
          * */
         inline fun <T> runOnDefault(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = runBlocking(Default.dispatcher) {
             block()
         }
@@ -136,7 +136,7 @@ enum class AppDispatchers(
          * @see launchOnMain
          * */
         inline fun <T> runOnMain(
-            crossinline block: suspend () -> T
+            crossinline block: suspend CoroutineScope.() -> T
         ): T = runBlocking(Main.dispatcher) {
             block()
         }
@@ -149,7 +149,7 @@ enum class AppDispatchers(
          * @see withIOContext
          * @see runOnIO
          */
-        inline fun launchOnIO(crossinline block: suspend () -> Unit) {
+        inline fun launchOnIO(crossinline block: suspend CoroutineScope.() -> Unit) {
             IO.scope.launch {
                 block()
             }
@@ -163,7 +163,7 @@ enum class AppDispatchers(
          * @see withDefaultContext
          * @see runOnDefault
          */
-        inline fun launchOnDefault(crossinline block: suspend () -> Unit) {
+        inline fun launchOnDefault(crossinline block: suspend CoroutineScope.() -> Unit) {
             Default.scope.launch {
                 block()
             }
@@ -177,7 +177,7 @@ enum class AppDispatchers(
          * @see withMainContext
          * @see runOnMain
          */
-        inline fun launchOnMain(crossinline block: suspend () -> Unit) {
+        inline fun launchOnMain(crossinline block: suspend CoroutineScope.() -> Unit) {
             Main.scope.launch {
                 block()
             }
