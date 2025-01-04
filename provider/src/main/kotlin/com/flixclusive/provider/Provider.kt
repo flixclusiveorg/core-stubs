@@ -18,16 +18,15 @@ import okhttp3.OkHttpClient
  *
  * @property settings A [ProviderSettings] instance that holds the provider's settings/preferences.
  * */
-@Suppress("PropertyName")
+@Suppress("PropertyName", "MemberVisibilityCanBePrivate")
 abstract class Provider {
-    open val name: String
-        get() = manifest?.name ?: throw Exception("This provider has no name.")
+    open val name: String get() = manifest.name
 
-    var manifest: ProviderManifest? = null
-    var resources: Resources? = null
-    var __filename: String? = null
-
+    lateinit var __filename: String
+    lateinit var manifest: ProviderManifest
     lateinit var settings: ProviderSettings
+
+    var resources: Resources? = null
 
     /**
      * Called when the [Provider] is loaded. Should return a [ProviderApi] instance.
