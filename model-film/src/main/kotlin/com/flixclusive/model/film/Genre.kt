@@ -10,12 +10,10 @@ import kotlinx.serialization.Serializable
  * @property id The unique identifier of the genre.
  * @property name The name of the genre.
  * @property mediaType The type of media this genre applies to (optional).
- * @property posterPath The path to a poster image associated with the genre (optional).
  */
 @Serializable
 data class Genre(
     val id: Int,
     val name: String,
-    val mediaType: String? = null,
-    val posterPath: String? = null
+    val mediaType: String? = null
 ) : java.io.Serializable
