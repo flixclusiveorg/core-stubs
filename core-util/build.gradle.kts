@@ -8,12 +8,12 @@ android {
 
 dependencies {
     api(libs.okhttp)
+    api(libs.okhttp.dnsoverhttps)
+    api(libs.gson)
+    api(libs.jsoup)
+    api(libs.retrofit)
 
     implementation(libs.core.ktx)
-    implementation(libs.gson)
-    implementation(libs.jsoup)
     implementation(libs.junit)
     implementation(libs.mockk)
-    implementation(libs.okhttp.dnsoverhttps)
-    implementation(libs.retrofit)
 }

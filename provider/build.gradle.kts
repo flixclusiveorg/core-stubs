@@ -14,7 +14,7 @@ dependencies {
     api(projects.modelProvider)
     api(projects.modelFilm)
 
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
+    compileOnly(libs.compose.runtime)
+    compileOnly(libs.compose.ui)
     implementation(libs.core.ktx)
 }
