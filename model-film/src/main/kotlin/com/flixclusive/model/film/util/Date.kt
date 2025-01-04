@@ -1,22 +1,26 @@
 package com.flixclusive.model.film.util
 
-import com.flixclusive.model.film.FilmSearchItem
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import java.util.regex.Pattern
 
-/**
- * Filters out films that have not yet been released and have no poster image.
- * */
-fun List<FilmSearchItem>.filterOutUnreleasedFilms()
-    = filterNot {
-        try {
-            isDateInFuture(it.parsedReleaseDate!!)
-        } catch (_: Exception) {
-            false
-        } || it.posterImage.isNullOrEmpty()
+
+internal fun formatDate(dateString: String?): String {
+    if (dateString.isNullOrEmpty()) {
+        return "No release date"
     }
+
+    val locale = Locale.US
+
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd", locale)
+    val outputFormat = SimpleDateFormat("MMMM d, yyyy", locale)
+
+    val date = inputFormat.parse(dateString)
+    return date?.let {
+        outputFormat.format(it)
+    } ?: "No release date"
+}
+
 
 /**
  * Determines whether the given date string represents a date in the future.
@@ -38,24 +42,6 @@ fun isDateInFuture(dateString: String): Boolean {
     val date = formatter.parse(dateString)
 
     return date?.after(currentDate) ?: false
-}
-
-/**
- * Replaces the type in the URL with the given type.
- *
- * @param type The type to replace the current type with.
- *
- * @return The URL with the replaced type.
- * */
-fun String.replaceTypeInUrl(type: String): String {
-    val pattern = Pattern.compile("(?<=/)[a-z]+(?=\\?)")
-    val matcher = pattern.matcher(this)
-
-    if (matcher.find()) {
-        return matcher.replaceFirst(type)
-    }
-
-    return this
 }
 
 /**
