@@ -11,13 +11,6 @@ object GithubConstant {
     const val GITHUB_REPOSITORY_URL = "https://github.com/flixclusiveorg/Flixclusive"
 
     /**
-     * The URL of the GitHub repository containing built-in providers for Flixclusive.
-     *
-     * TODO: Remove this in the future
-     */
-    const val GITHUB_BUILT_IN_PROVIDERS_REPOSITORY = "https://github.com/flixclusiveorg/flx-providers"
-
-    /**
      * The URL for the latest release of Flixclusive on GitHub.
      */
     const val GITHUB_LATEST_RELEASE = "$GITHUB_REPOSITORY_URL/releases/latest"
