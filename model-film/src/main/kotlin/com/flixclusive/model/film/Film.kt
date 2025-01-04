@@ -64,7 +64,7 @@ enum class FilmReleaseStatus {
  * @property isFromTmdb Indicates whether the film is from TMDB (optional).
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
  *
- * @see FilmDetails
+ * @see FilmMetadata
  * @see FilmSearchItem
  */
 @Serializable

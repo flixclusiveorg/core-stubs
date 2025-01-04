@@ -15,19 +15,35 @@ import kotlinx.serialization.Serializable
  * @see TvShow
  */
 @Serializable
-abstract class FilmDetails : Film() {
+abstract class FilmMetadata : Film() {
     abstract val producers: List<Company>
     abstract val tagLine: String?
     abstract val cast: List<Person>
 
     /** Checks if the film is a movie. */
-    val isMovie
-        get() = this is Movie
+    val isMovie get() = this is Movie
 
     /** Checks if the film is a tv show. */
-    val isTvShow
-        get() = this is TvShow
+    val isTvShow get() = this is TvShow
 }
+
+/**
+ * An abstract representation of detailed film information. Deprecated in favor of [FilmMetadata].
+ *
+ * @property producers The production companies involved in the film.
+ * @property tagLine The tagline of the film.
+ * @property cast The cast of the film.
+ *
+ * @see Film
+ * @see Movie
+ * @see TvShow
+ */
+@Deprecated(
+    message = "FilmDetails is deprecated. Use FilmMetadata instead.",
+    replaceWith = ReplaceWith("FilmMetadata")
+)
+@Serializable
+abstract class FilmDetails : FilmMetadata()
 
 /*
 Same properties with data types:

@@ -34,7 +34,7 @@ import kotlinx.serialization.Serializable
  * @property releaseStatus The release status of the TV show.
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
  *
- * @see FilmDetails
+ * @see FilmMetadata
  * @see Film
  * @see Movie
  * */
@@ -69,7 +69,7 @@ data class TvShow(
     val totalEpisodes: Int = 0,
     val totalSeasons: Int = 0,
     override val runtime: Int? = null,
-) : FilmDetails() {
+) : FilmMetadata() {
     override val filmType: FilmType
         get() = FilmType.TV_SHOW
 }

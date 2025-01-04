@@ -3,7 +3,7 @@ package com.flixclusive.provider.webview
 import android.content.Context
 import androidx.annotation.MainThread
 import com.flixclusive.core.util.webview.WebViewDriver
-import com.flixclusive.model.film.FilmDetails
+import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.common.tv.Episode
 import com.flixclusive.model.provider.link.MediaLink
 
@@ -29,7 +29,7 @@ abstract class ProviderWebView(
      */
     abstract suspend fun getLinks(
         watchId: String,
-        film: FilmDetails,
+        film: FilmMetadata,
         episode: Episode? = null,
         onLinkFound: (MediaLink) -> Unit,
     )

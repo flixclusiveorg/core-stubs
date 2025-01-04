@@ -4,7 +4,7 @@ import android.content.Context
 import android.webkit.WebView
 import androidx.annotation.MainThread
 import com.flixclusive.model.film.Film
-import com.flixclusive.model.film.FilmDetails
+import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.FilmSearchItem
 import com.flixclusive.model.film.Movie
 import com.flixclusive.model.film.SearchResponseData
@@ -50,7 +50,7 @@ abstract class ProviderApi(
     )
 
     open val baseUrl: String = ""
-    open val testFilm: FilmDetails = getDefaultTestFilm()
+    open val testFilm: FilmMetadata = getDefaultTestFilm()
     open val filters: FilterList get() = FilterList()
     open val catalogs: List<ProviderCatalog> get() = emptyList()
 
@@ -93,16 +93,16 @@ abstract class ProviderApi(
     /**
      * Retrieves detailed information about a film.
      * @param film The [Film] object of the film to retrieve details for.
-     * @return a [FilmDetails] instance containing the film's information. It could either be a [Movie] or [TvShow].
+     * @return a [FilmMetadata] instance containing the film's information. It could either be a [Movie] or [TvShow].
      */
-    open suspend fun getFilmDetails(film: Film): FilmDetails
+    open suspend fun getFilmMetadata(film: Film): FilmMetadata
         = throw NotImplementedError()
 
     /**
      * Obtains resource links for the provided film, season, and episode.
      *
      * @param watchId The unique watch identifier for the film.
-     * @param film The detailed film object of the film. Notice that it is a [FilmDetails] and not a [Film] object, this means that this film object has full details and not just the partial info of it. It could either be a [Movie] or [TvShow].
+     * @param film The detailed film object of the film. Notice that it is a [FilmMetadata] and not a [Film] object, this means that this film object has full details and not just the partial info of it. It could either be a [Movie] or [TvShow].
      * @param episode The [Episode] object of the episode. Defaults to null for movies.
      * @param onLinkFound A callback function that is invoked when a [Stream] or [Subtitle] is found.
      *
@@ -110,7 +110,7 @@ abstract class ProviderApi(
      */
     open suspend fun getLinks(
         watchId: String,
-        film: FilmDetails,
+        film: FilmMetadata,
         episode: Episode? = null,
         onLinkFound: (MediaLink) -> Unit
     ): Unit = throw NotImplementedError()

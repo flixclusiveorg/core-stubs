@@ -31,7 +31,7 @@ import kotlinx.serialization.Serializable
  * @property recommendations The recommendations of the TV show.
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
  *
- * @see FilmDetails
+ * @see FilmMetadata
  * @see Film
  * @see TvShow
  * */
@@ -63,7 +63,7 @@ data class Movie(
     // == Custom fields ==
     /** The movies collection this movie belongs to. */
     val collection: TMDBCollection? = null,
-) : FilmDetails() {
+) : FilmMetadata() {
     override val filmType: FilmType
         get() = FilmType.MOVIE
 }
