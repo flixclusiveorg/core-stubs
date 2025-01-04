@@ -3,7 +3,6 @@ package com.flixclusive.provider.webview
 import android.content.Context
 import androidx.annotation.MainThread
 import com.flixclusive.core.util.webview.WebViewDriver
-import com.flixclusive.model.film.FilmDetails
 import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.common.tv.Episode
 import com.flixclusive.model.provider.link.MediaLink
@@ -28,26 +27,10 @@ abstract class ProviderWebView(
      * @param episode Optional episode details, used if the media is part of a series.
      * @param onLinkFound Callback function that is triggered whenever a [MediaLink] is found.
      */
-    abstract suspend fun getLinks(
+    open suspend fun getLinks(
         watchId: String,
         film: FilmMetadata,
         episode: Episode? = null,
         onLinkFound: (MediaLink) -> Unit,
-    )
-
-    /**
-     * Obtains media links from WebView based on the given [watchId], [film], and optionally [episode].
-     *
-     * @param watchId The unique identifier used to get media links.
-     * @param film The details of the film to get links for.
-     * @param episode Optional episode details, used if the media is part of a series.
-     * @param onLinkFound Callback function that is triggered whenever a [MediaLink] is found.
-     */
-    @Deprecated("Use the other getLinks instead that uses FilmMetadata")
-    abstract suspend fun getLinks(
-        watchId: String,
-        film: FilmDetails,
-        episode: Episode? = null,
-        onLinkFound: (MediaLink) -> Unit,
-    )
+    ): Unit = throw NotImplementedError()
 }
