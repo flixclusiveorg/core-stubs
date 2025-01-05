@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 /**
  * Represents the manifest information of a provider.
  *
+ * @property id The unique identifier of the provider.
  * @property providerClassName The fully qualified class name of the provider.
  * @property name The name of the provider.
  * @property versionName The version name of the provider.
@@ -14,10 +15,11 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ProviderManifest(
-    val providerClassName: String,
+    val id: String,
     val name: String,
     val versionName: String,
     val versionCode: Long,
-    val requiresResources: Boolean,
     val updateUrl: String?,
+    val providerClassName: String,
+    val requiresResources: Boolean
 )
