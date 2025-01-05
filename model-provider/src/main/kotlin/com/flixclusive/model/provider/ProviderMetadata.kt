@@ -30,8 +30,8 @@ import kotlin.random.Random
 @Serializable
 data class ProviderMetadata(
     val authors: List<Author>,
-    val repositoryUrl: String?,
-    val buildUrl: String?,
+    val repositoryUrl: String,
+    val buildUrl: String,
     val changelog: String? = null,
     val versionName: String,
     val versionCode: Long,
@@ -43,36 +43,8 @@ data class ProviderMetadata(
     val name: String,
     val providerType: ProviderType,
     val status: Status,
-    val id: String?,
-) {
-    companion object {
-        /**
-         * Generates a 15-length string hash from the provider's data
-         * using the following properties:
-         * - [repositoryUrl]
-         * - [buildUrl]
-         *
-         * These two were chosen as they don't seem to change that often
-         * compare to the other properties.
-         *
-         * @return A 15-length string hash.
-         * */
-        fun generateIdHash(
-            providerMetadata: ProviderMetadata
-        ): String {
-            val dataToHash = listOfNotNull(
-                providerMetadata.buildUrl,
-                // ... add more
-            ).joinToString("|")
-
-            val digest = MessageDigest.getInstance("SHA-1")
-            val hashBytes = digest.digest(dataToHash.toByteArray())
-            return hashBytes.toHexString().take(15)
-        }
-
-        private fun ByteArray.toHexString(): String = joinToString("") { "%02x".format(it) }
-    }
-}
+    val id: String,
+)
 
 /**
  * Represents the data associated with a provider.
