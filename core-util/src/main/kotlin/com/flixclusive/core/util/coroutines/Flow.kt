@@ -51,12 +51,12 @@ fun <T> Flow<T>.asStateFlow(
  * The terminal operator that returns the first non-null element emitted by the flow and then cancels flow's collection.
  * Throws [NoSuchElementException] if the flow was empty.
  */
-suspend fun <T> Flow<T?>.firstNotNull(): T {
+suspend fun <T> Flow<T>.firstNotNull(): T {
     var result: Any? = null
     collectWhile {
         if (it != null) {
             result = it
-            false
+            return@collectWhile false
         }
 
         true
