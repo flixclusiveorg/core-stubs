@@ -34,7 +34,7 @@ fun Project.android(configuration: LibraryExtension.() -> Unit)
 
 subprojects {
     group = "com.github.flixclusive"
-    version = "1.2.3"
+    version = "1.2.5"
 
     afterEvaluate {
         publishing {

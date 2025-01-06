@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  *
  * @property id The unique identifier for the film.
  * @property title The title of the film.
- * @property providerName The name of the provider where this film came from.
+ * @property providerId The provider id of the provider this film came from.
  * @property homePage The URL of the film's home page.
  * @property posterImage The URL of the film's poster image.
  * @property filmType The type of the film. Defaults to [FilmType.MOVIE]. For more, see [FilmType].
@@ -32,7 +32,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FilmSearchItem(
     override val id: String?,
-    override val providerName: String,
+    override val providerId: String,
     /** @see FilmType */
     override val filmType: FilmType,
     override val homePage: String?,

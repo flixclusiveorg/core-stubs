@@ -1,8 +1,8 @@
 package com.flixclusive.model.film
 
-import com.flixclusive.model.film.util.FilmType
 import com.flixclusive.model.film.common.details.Company
 import com.flixclusive.model.film.common.tv.Season
+import com.flixclusive.model.film.util.FilmType
 import kotlinx.serialization.Serializable
 
 /**
@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  *
  * @property id The unique identifier of the TV show.
  * @property title The title of the TV show.
- * @property providerName The name of the provider where this film came from.
+ * @property providerId The provider id of the provider this film came from.
  * @property homePage The home page of the TV show.
  * @property posterImage The poster image of the TV show.
  * @property backdropImage The backdrop image of the TV show.
@@ -54,7 +54,7 @@ data class TvShow(
     override val rating: Double? = null,
     override val producers: List<Company> = emptyList(),
     override val recommendations: List<FilmSearchItem> = emptyList(),
-    override val providerName: String?,
+    override val providerId: String,
     override val adult: Boolean = false,
     override val overview: String? = null,
     override val tagLine: String? = null,

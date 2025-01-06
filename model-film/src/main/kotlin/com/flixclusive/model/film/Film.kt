@@ -51,7 +51,7 @@ enum class FilmReleaseStatus {
  * @property backdropImage The URL to the backdrop image of the film (optional).
  * @property posterImage The URL to the poster image of the film (optional).
  * @property homePage The URL to the home page of the film (optional).
- * @property providerName The name of the provider this film came from.
+ * @property providerId The provider id of the provider this film came from.
  * @property imdbId The IMDB ID of the film (optional).
  * @property tmdbId The TMDB ID of the film (optional).
  * @property logoImage The URL to the logo image of the film (optional).
@@ -86,7 +86,7 @@ abstract class Film : java.io.Serializable {
 
     open val recommendations: List<FilmSearchItem>
         get() = emptyList()
-    open val providerName: String?
+    open val providerId: String
         get() = DEFAULT_FILM_SOURCE_NAME
     open val imdbId: String?
         get() = null
@@ -121,7 +121,7 @@ abstract class Film : java.io.Serializable {
         get() = id ?: tmdbId?.toString() ?: imdbId ?: title
 
     val isFromTmdb: Boolean
-        get() = this.tmdbId != null || providerName.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)
+        get() = this.tmdbId != null || providerId.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)
 }
 
 
