@@ -16,7 +16,7 @@ import com.flixclusive.provider.Provider
 )
 class ProviderSettings(
     private val fileDirectory: String,
-    private val providerName: String,
+    private val providerId: String,
 ) {
     /**
      * The main settings object of this wrapper class.
@@ -28,7 +28,7 @@ class ProviderSettings(
      * Creates a SettingsAPI for the specified plugin
      */
     init {
-        settings = JsonSettings(fileDirectory, providerName)
+        settings = JsonSettings(fileDirectory, providerId)
     }
 
     /**
@@ -38,7 +38,7 @@ class ProviderSettings(
      */
     fun resetSettings(): Boolean {
         val isSuccessful = settings.resetFile()
-        settings = JsonSettings(fileDirectory, providerName)
+        settings = JsonSettings(fileDirectory, providerId)
         return isSuccessful
     }
 
