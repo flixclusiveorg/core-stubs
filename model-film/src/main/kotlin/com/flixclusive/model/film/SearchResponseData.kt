@@ -1,6 +1,6 @@
 package com.flixclusive.model.film
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,5 +18,5 @@ data class SearchResponseData<T>(
     val page: Int = 1,
     val results: List<T> = emptyList(),
     val hasNextPage: Boolean = false,
-    @SerializedName("total_pages") val totalPages: Int = 0
+    @SerialName("total_pages") val totalPages: Int = 0
 )

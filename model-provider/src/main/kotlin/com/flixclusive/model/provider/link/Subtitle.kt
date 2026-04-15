@@ -1,7 +1,8 @@
 package com.flixclusive.model.provider.link
 
 import com.flixclusive.model.provider.link.SubtitleSource.ONLINE
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.JsonNames
 import java.io.Serializable
 
 /**
@@ -16,8 +17,9 @@ import java.io.Serializable
  *
  * @property name The name of the subtitle, derived from the [language].
  */
+@OptIn(ExperimentalSerializationApi::class)
 data class Subtitle(
-    @SerializedName("language", alternate = ["lang"]) val language: String,
+    @JsonNames("language", "lang") val language: String,
     val type: SubtitleSource = ONLINE,
     override val url: String,
     override val flags: Set<Flag>? = null,

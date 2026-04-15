@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
-    api(libs.gson)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
 }

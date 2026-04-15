@@ -5,7 +5,7 @@ import com.flixclusive.model.film.util.FilmType
 import kotlinx.serialization.Serializable
 
 /**
- * Represents a detailed information of a movie.
+ * Represents detailed information of a movie.
  *
  * @property id The unique identifier of the TV show.
  * @property title The title of the TV show.

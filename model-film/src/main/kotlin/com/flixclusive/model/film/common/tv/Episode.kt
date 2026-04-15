@@ -1,7 +1,7 @@
 package com.flixclusive.model.film.common.tv
 
 import com.flixclusive.model.film.util.formatDate
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Objects
 
@@ -26,12 +26,12 @@ data class Episode(
     val id: String = "",
     val overview: String = "",
     val runtime: Int? = null,
-    @SerializedName("episode_number") val number: Int = 0,
-    @SerializedName("name") val title: String = "",
-    @SerializedName("air_date") private val airDate: String? = null,
-    @SerializedName("season_number") val season: Int = 0,
-    @SerializedName("still_path") val image: String? = null,
-    @SerializedName("vote_average") val rating: Double? = null
+    @SerialName("episode_number") val number: Int = 0,
+    @SerialName("name") val title: String = "",
+    @SerialName("air_date") private val airDate: String? = null,
+    @SerialName("season_number") val season: Int = 0,
+    @SerialName("still_path") val image: String? = null,
+    @SerialName("vote_average") val rating: Double? = null
 ) : java.io.Serializable {
     /**
      * The formatted release date of the episode. Attempts to format the `airDate`

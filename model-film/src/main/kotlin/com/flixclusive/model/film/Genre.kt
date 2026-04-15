@@ -16,4 +16,4 @@ data class Genre(
     val id: Int,
     val name: String,
     val mediaType: String? = null
-) : java.io.Serializable
+)

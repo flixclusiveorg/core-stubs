@@ -1,6 +1,6 @@
 package com.flixclusive.model.film.common.tv
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,12 +23,12 @@ data class Season(
     val overview: String? = null,
     val name: String = "",
     val episodes: List<Episode> = emptyList(),
-    @SerializedName("air_date") private val airDate: String? = null,
-    @SerializedName("episode_count") private val episodeCount: Int? = null,
-    @SerializedName("vote_average") val rating: Double? = null,
-    @SerializedName("season_number") val number: Int = 0,
-    @SerializedName("poster_path") val image: String? = null,
-) : java.io.Serializable {
+    @SerialName("air_date") private val airDate: String? = null,
+    @SerialName("episode_count") private val episodeCount: Int? = null,
+    @SerialName("vote_average") val rating: Double? = null,
+    @SerialName("season_number") val number: Int = 0,
+    @SerialName("poster_path") val image: String? = null,
+) {
     /**
      * Indicates whether the season is unreleased. A season is considered unreleased
      * if it has no air date, episode count, and has a rating of 0.0.

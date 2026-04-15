@@ -1,6 +1,6 @@
 package com.flixclusive.model.film
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -17,8 +17,8 @@ import kotlinx.serialization.Serializable
 data class TMDBCollection(
     val id: Int,
     val overview: String? = null,
-    @SerializedName("parts") val films: List<FilmSearchItem>,
-    @SerializedName("backdrop_path") val backdropPath: String?,
-    @SerializedName("name") val collectionName: String,
-    @SerializedName("poster_path") val posterPath: String?
-) : java.io.Serializable
+    @SerialName("parts") val films: List<FilmSearchItem>,
+    @SerialName("backdrop_path") val backdropPath: String?,
+    @SerialName("name") val collectionName: String,
+    @SerialName("poster_path") val posterPath: String?
+)

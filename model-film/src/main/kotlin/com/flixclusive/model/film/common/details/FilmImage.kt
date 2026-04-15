@@ -1,6 +1,6 @@
 package com.flixclusive.model.film.common.details
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class FilmImage(
-    @SerializedName("file_path") val filePath: String,
+    @SerialName("file_path") val filePath: String,
     val height: Int,
     val width: Int
 )

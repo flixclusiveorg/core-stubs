@@ -10,7 +10,6 @@ dependencies {
     api(libs.okhttp)
 
     implementation(libs.core.ktx)
-    implementation(libs.gson)
     implementation(libs.jsoup)
     implementation(libs.junit)
     implementation(libs.mockk)

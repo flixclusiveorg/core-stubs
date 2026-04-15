@@ -1,8 +1,7 @@
 package com.flixclusive.provider.settings
 
 import com.flixclusive.core.util.log.errorLog
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.json.Json
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -25,7 +24,14 @@ class JsonSettings(
 ) {
     private val settingsFile = "$fileDirectory/$fileName.json"
 
-    val gson = Gson()
+    val json by lazy {
+        Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+            coerceInputValues = true
+        }
+    }
+
     val cache: MutableMap<String, Any> = HashMap()
     val settings: JSONObject by lazy {
         val file = File(settingsFile)
@@ -129,7 +135,7 @@ class JsonSettings(
         if (settings.has(key)) settings.getInt(key) else defaultValue
 
     @Synchronized
-    private fun putObject(key: String, value: Any?) {
+    fun putObject(key: String, value: Any?) {
         settings.put(key, value)
         writeData()
     }
@@ -220,14 +226,12 @@ class JsonSettings(
             return cached as T
         } catch (ignored: Throwable) { }
 
-        val t: T? = when {
-            settings.has(key) -> gson.fromJson(
-                /* json = */ settings.getString(key),
-                /* typeOfT = */ object : TypeToken<T>() {}.type
-            )
-            else -> null
+        return when {
+            settings.has(key) -> runCatching {
+                json.decodeFromString<T>(settings.getString(key))
+            }.getOrNull() ?: defaultValue
+            else -> defaultValue
         }
-        return t ?: defaultValue
     }
 
     /**
@@ -235,9 +239,9 @@ class JsonSettings(
      * @param key Key of the item
      * @param value Value
      */
-    fun setObject(key: String, value: Any) {
-        cache[key] = value
-        val stringJson = gson.toJson(value)
+    inline fun <reified T> setObject(key: String, value: T) {
+        cache[key] = value as Any
+        val stringJson = json.encodeToString(value)
         putObject(key, if (stringJson.startsWith("{")) JSONObject(stringJson) else JSONArray(stringJson))
     }
 }
