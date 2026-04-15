@@ -29,6 +29,5 @@ data class FilmCollection(
         expression = "FilmCollection",
         imports = ["com.your.package.FilmCollection"]
     ),
-    level = DeprecationLevel.WARNING
 )
 typealias TMDBCollection = FilmCollection

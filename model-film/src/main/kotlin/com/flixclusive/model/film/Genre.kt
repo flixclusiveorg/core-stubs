@@ -9,11 +9,17 @@ import kotlinx.serialization.Serializable
  *
  * @property id The unique identifier of the genre.
  * @property name The name of the genre.
- * @property mediaType The type of media this genre applies to (optional).
+ * @property mediaType The type of media this genre applies to (optional, deprecated).
+ * @property url Optional deep-link URL for navigation.
  */
 @Serializable
 data class Genre(
     val id: Int,
     val name: String,
-    val mediaType: String? = null
+    @Deprecated(
+        message = "mediaType is deprecated and will be removed. Use url for navigation metadata instead.",
+        level = DeprecationLevel.WARNING,
+    )
+    val mediaType: String? = null,
+    val url: String? = null,
 )

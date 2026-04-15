@@ -2,8 +2,12 @@ package com.flixclusive.model.film
 
 import com.flixclusive.model.film.FilmIdSource.IMDB
 import com.flixclusive.model.film.FilmIdSource.TMDB
+import com.flixclusive.model.film.util.DateAsLongSerializer
 import com.flixclusive.model.film.util.FilmType
+import com.flixclusive.model.film.util.dateFromYear
+import com.flixclusive.model.film.util.parseDate
 import kotlinx.serialization.Serializable
+import java.util.Date
 
 /**
  * Represents a film search result item.
@@ -42,25 +46,81 @@ data class FilmSearchItem(
     override val posterImage: String?,
     override val adult: Boolean = false,
     override val backdropImage: String? = null,
-    override val sourceIds: Map<FilmIdSource, String> = emptyMap(),
-    @Deprecated(
-        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
-        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
-    )
-    override val imdbId: String? = sourceIds[IMDB],
-    @Deprecated(
-        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
-        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
-    )
-    override val tmdbId: Int? = sourceIds[TMDB]?.toIntOrNull(),
-    override val releaseDate: String? = null,
+    override val externalIds: Map<FilmIdSource, String> = emptyMap(),
+    @Serializable(DateAsLongSerializer::class) override val releaseDate: Date? = null,
     override val rating: Double? = null,
     override val language: String? = null,
     override val overview: String? = null,
-    override val year: Int? = null,
     override val logoImage: String? = null,
     override val genres: List<Genre> = emptyList(),
     override val customProperties: Map<String, String?> = emptyMap(),
     val voteCount: Int = 0,
     val genreIds: List<Int> = emptyList(),
-) : Film()
+) : Film() {
+
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
+    )
+    override val imdbId: String?
+        get() = externalIds[IMDB]
+
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
+    )
+    override val tmdbId: Int?
+        get() = externalIds[TMDB]?.toIntOrNull()
+
+    @Deprecated(
+        message = "Legacy constructor without sourceIds is deprecated. Use sourceIds and Date releaseDate instead.",
+        replaceWith = ReplaceWith(
+            "FilmSearchItem(id, providerId, filmType, homePage, title, posterImage, adult = adult, backdropImage = backdropImage, sourceIds = sourceIds, releaseDate = releaseDate, rating = rating, language = language, overview = overview, logoImage = logoImage, genres = genres, customProperties = customProperties, voteCount = voteCount, genreIds = genreIds)"
+        ),
+        level = DeprecationLevel.WARNING,
+    )
+    constructor(
+        id: String?,
+        providerId: String,
+        filmType: FilmType,
+        homePage: String?,
+        title: String,
+        posterImage: String?,
+        adult: Boolean = false,
+        backdropImage: String? = null,
+        imdbId: String? = null,
+        tmdbId: Int? = null,
+        releaseDate: String? = null,
+        rating: Double? = null,
+        language: String? = null,
+        overview: String? = null,
+        year: Int? = null,
+        logoImage: String? = null,
+        genres: List<Genre> = emptyList(),
+        customProperties: Map<String, String?> = emptyMap(),
+        voteCount: Int = 0,
+        genreIds: List<Int> = emptyList(),
+    ) : this(
+        id = id ?: tmdbId?.toString() ?: imdbId ?: "",
+        providerId = providerId,
+        filmType = filmType,
+        homePage = homePage,
+        title = title,
+        posterImage = posterImage,
+        adult = adult,
+        backdropImage = backdropImage,
+        externalIds = buildMap {
+            tmdbId?.let { put(TMDB, it.toString()) }
+            imdbId?.let { put(IMDB, it) }
+        },
+        releaseDate = parseDate(releaseDate) ?: year?.let(::dateFromYear),
+        rating = rating,
+        language = language,
+        overview = overview,
+        logoImage = logoImage,
+        genres = genres,
+        customProperties = customProperties,
+        voteCount = voteCount,
+        genreIds = genreIds,
+    )
+}

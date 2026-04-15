@@ -22,5 +22,8 @@ enum class ProviderStatus {
     Working
 }
 
-@Deprecated("Use ProviderStatus instead.")
+@Deprecated(
+    "Use ProviderStatus instead.",
+    replaceWith = ReplaceWith("ProviderStatus"),
+)
 typealias Status = ProviderStatus

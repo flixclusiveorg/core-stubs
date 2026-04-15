@@ -25,10 +25,7 @@ import kotlinx.coroutines.withContext
  * @see FlxDispatchers
  */
 @Deprecated(
-    replaceWith = ReplaceWith(
-        expression = "FlxDispatchers",
-        imports = ["com.flixclusive.core.util.coroutines.FlxDispatchers"]
-    ),
+    replaceWith = ReplaceWith(expression = "FlxDispatchers"),
     message = "This enum is deprecated. Use FlxDispatchers instead."
 )
 typealias AppDispatchers = FlxDispatchers

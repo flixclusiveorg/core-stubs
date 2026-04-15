@@ -7,12 +7,11 @@ android {
 }
 
 dependencies {
-    api(libs.okhttp)
+    compileOnly(libs.okhttp)
 
-    implementation(libs.core.ktx)
-    implementation(libs.jsoup)
-    implementation(libs.junit)
-    implementation(libs.mockk)
-    implementation(libs.okhttp.dnsoverhttps)
-    implementation(libs.retrofit)
+    compileOnly(libs.core.ktx)
+    compileOnly(libs.jsoup)
+    compileOnly(libs.junit)
+    compileOnly(libs.mockk)
+    compileOnly(libs.okhttp.dnsoverhttps)
 }

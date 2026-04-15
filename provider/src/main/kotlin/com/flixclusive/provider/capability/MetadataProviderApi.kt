@@ -1,9 +1,9 @@
-package com.flixclusive.provider.capability.api
+package com.flixclusive.provider.capability
 
 import com.flixclusive.model.film.Film
 import com.flixclusive.model.film.FilmMetadata
 
 /** Capability contract for metadata APIs. */
-interface MetadataProviderApi {
+interface MetadataProviderApi : CapabilityProviderApi {
     suspend fun getMetadata(film: Film): FilmMetadata
 }

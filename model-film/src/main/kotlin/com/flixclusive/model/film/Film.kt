@@ -1,16 +1,19 @@
 package com.flixclusive.model.film
 
-import com.flixclusive.model.film.FilmIdSource.IMDB
-import com.flixclusive.model.film.FilmIdSource.TMDB
-import com.flixclusive.model.film.FilmReleaseStatus.COMING_SOON
-import com.flixclusive.model.film.FilmReleaseStatus.RELEASED
-import com.flixclusive.model.film.FilmReleaseStatus.UNKNOWN
+import com.flixclusive.model.film.util.DateAsLongSerializer
 import com.flixclusive.model.film.util.FilmType
+import com.flixclusive.model.film.util.extractYear
 import com.flixclusive.model.film.util.formatDate
 import com.flixclusive.model.film.util.isDateInFuture
 import kotlinx.serialization.Serializable
+import java.util.Date
 
 /** The default film source name. Defaults to TMDB. */
+@Deprecated(
+    message = "The app will now have its TMDB support separated as a provider. " +
+            "This constant is no longer relevant and will be removed in a future version.",
+    level = DeprecationLevel.WARNING
+)
 const val DEFAULT_FILM_SOURCE_NAME = "TMDB"
 
 /**
@@ -54,17 +57,16 @@ enum class FilmReleaseStatus {
  * @property posterImage The URL to the poster image of the film (optional).
  * @property homePage The URL to the home page of the film (optional).
  * @property providerId The provider id of the provider this film came from.
- * @property sourceIds A map of external IDs keyed by [FilmIdSource].
+ * @property externalIds A map of external IDs keyed by [FilmIdSource].
  * @property imdbId The IMDB ID of the film (optional).
  * @property tmdbId The TMDB ID of the film (optional).
  * @property logoImage The URL to the logo image of the film (optional).
- * @property parsedReleaseDate The parsed release date of the film in a consistent format.
+ * @property parsedReleaseDate Deprecated pre-formatted release date string.
  * @property releaseDate The release date of the film.
- * @property year The year of the film's release (optional).
+ * @property year The release year derived from [releaseDate].
  * @property releaseStatus The release status of the film. See [FilmReleaseStatus].
  * @property identifier A deprecated alias of [id].
  * @property year The year of the film's release, extracted from the release date.
- * @property isFromTmdb Indicates whether the film is from TMDB (optional).
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
  *
  * @see FilmMetadata
@@ -83,16 +85,15 @@ abstract class Film : java.io.Serializable {
     abstract val backdropImage: String?
     abstract val posterImage: String?
     abstract val homePage: String?
-    abstract val releaseDate: String?
-    abstract val year: Int?
+
+    @Serializable(DateAsLongSerializer::class) abstract val releaseDate: Date?
     abstract val customProperties: Map<String, String?>
 
     open val recommendations: List<FilmSearchItem>
         get() = emptyList()
-    open val providerId: String
-        get() = DEFAULT_FILM_SOURCE_NAME
+    abstract val providerId: String
 
-    open val sourceIds: Map<FilmIdSource, String>
+    open val externalIds: Map<FilmIdSource, String>
         get() = emptyMap()
 
     @Deprecated(
@@ -100,23 +101,38 @@ abstract class Film : java.io.Serializable {
         replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
     )
     open val imdbId: String?
-        get() = sourceIds[IMDB]
+        get() = externalIds[FilmIdSource.IMDB]
 
     @Deprecated(
         message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
         replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
     )
     open val tmdbId: Int?
-        get() = sourceIds[TMDB]?.toIntOrNull()
+        get() = externalIds[FilmIdSource.TMDB]?.toIntOrNull()
 
     open val logoImage: String?
         get() = null
+
+    @Deprecated(
+        message = "parsedReleaseDate is deprecated. Use releaseDate directly.",
+        replaceWith = ReplaceWith("releaseDate"),
+        level = DeprecationLevel.WARNING,
+    )
     open val parsedReleaseDate: String?
         get() = try {
             formatDate(releaseDate)
         } catch (_: Throwable) {
-            releaseDate
+            null
         }
+
+    @Deprecated(
+        message = "year is deprecated. Derive year from releaseDate instead.",
+        replaceWith = ReplaceWith("releaseDate"),
+        level = DeprecationLevel.WARNING,
+    )
+    open val year: Int?
+        get() = releaseDate?.extractYear()
+
     open val runtime: Int?
         get() = null
     open val genres: List<Genre>
@@ -126,26 +142,14 @@ abstract class Film : java.io.Serializable {
     /** @see FilmReleaseStatus */
     open val releaseStatus: FilmReleaseStatus
         get() = try {
+            val date = releaseDate
             when {
-                !isDateInFuture(releaseDate!!) -> RELEASED
-                else -> COMING_SOON
+                date == null -> FilmReleaseStatus.UNKNOWN
+                !isDateInFuture(date) -> FilmReleaseStatus.RELEASED
+                else -> FilmReleaseStatus.COMING_SOON
             }
         } catch (_: Throwable) {
-            UNKNOWN
-        }
-
-    @Suppress("DEPRECATION")
-    private val effectiveSourceIds: Map<FilmIdSource, String>
-        get() = buildMap {
-            putAll(sourceIds)
-
-            if (!containsKey(TMDB)) {
-                tmdbId?.toString()?.let { put(TMDB, it) }
-            }
-
-            if (!containsKey(IMDB)) {
-                imdbId?.let { put(IMDB, it) }
-            }
+            FilmReleaseStatus.UNKNOWN
         }
 
     @Deprecated(
@@ -154,9 +158,6 @@ abstract class Film : java.io.Serializable {
     )
     val identifier: String
         get() = id
-
-    val isFromTmdb: Boolean
-        get() = effectiveSourceIds.containsKey(TMDB) || providerId.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)
 }
 
 

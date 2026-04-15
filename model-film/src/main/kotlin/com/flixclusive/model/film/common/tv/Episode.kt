@@ -1,8 +1,11 @@
 package com.flixclusive.model.film.common.tv
 
+import com.flixclusive.model.film.util.DateAsLongSerializer
 import com.flixclusive.model.film.util.formatDate
+import com.flixclusive.model.film.util.parseDate
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.Date
 import java.util.Objects
 
 /**
@@ -15,7 +18,7 @@ import java.util.Objects
  * @property runtime The duration of the episode in minutes.
  * @property number The episode number within its season.
  * @property title The title of the episode.
- * @property airDate The original air date of the episode (optional), may be in an inconsistent format.
+ * @property airDate The original air date of the episode (optional).
  * @property season The season number the episode belongs to.
  * @property image The path to an image associated with the episode (optional).
  * @property rating The average rating of the episode (optional).
@@ -28,7 +31,8 @@ data class Episode(
     val runtime: Int? = null,
     @SerialName("episode_number") val number: Int = 0,
     @SerialName("name") val title: String = "",
-    @SerialName("air_date") private val airDate: String? = null,
+    @Serializable(DateAsLongSerializer::class)
+    @SerialName("air_date") val airDate: Date? = null,
     @SerialName("season_number") val season: Int = 0,
     @SerialName("still_path") val image: String? = null,
     @SerialName("vote_average") val rating: Double? = null
@@ -41,8 +45,35 @@ data class Episode(
         get() = try {
             formatDate(airDate)
         } catch (_: Throwable) {
-            airDate ?: ""
+            ""
         }
+
+    @Deprecated(
+        message = "String airDate constructor is deprecated. Use Date airDate instead.",
+        replaceWith = ReplaceWith("Episode(id, overview, runtime, number, title, airDate, season, image, rating)"),
+        level = DeprecationLevel.WARNING,
+    )
+    constructor(
+        id: String = "",
+        overview: String = "",
+        runtime: Int? = null,
+        number: Int = 0,
+        title: String = "",
+        airDate: String? = null,
+        season: Int = 0,
+        image: String? = null,
+        rating: Double? = null,
+    ) : this(
+        id = id,
+        overview = overview,
+        runtime = runtime,
+        number = number,
+        title = title,
+        airDate = parseDate(airDate),
+        season = season,
+        image = image,
+        rating = rating,
+    )
 
     /**
      * Calculates the hash code based on the episode's season, number, and ID.

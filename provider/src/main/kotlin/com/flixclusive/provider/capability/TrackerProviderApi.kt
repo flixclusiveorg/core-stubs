@@ -1,4 +1,4 @@
-package com.flixclusive.provider.capability.api
+package com.flixclusive.provider.capability
 
 /**
  * Capability contract reserved for tracking integrations.
@@ -6,4 +6,4 @@ package com.flixclusive.provider.capability.api
  * This is intentionally empty in this phase because model contracts for tracking
  * are not yet part of core-stubs.
  */
-interface TrackerProviderApi
+interface TrackerProviderApi : CapabilityProviderApi
