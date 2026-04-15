@@ -1,7 +1,7 @@
 package com.flixclusive.provider.settings
 
 import com.flixclusive.core.util.log.errorLog
-import kotlinx.serialization.json.Json
+import com.flixclusive.core.util.network.json.AppJson
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -23,14 +23,6 @@ class JsonSettings(
     fileName: String,
 ) {
     private val settingsFile = "$fileDirectory/$fileName.json"
-
-    val json by lazy {
-        Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-            coerceInputValues = true
-        }
-    }
 
     val cache: MutableMap<String, Any> = HashMap()
     val settings: JSONObject by lazy {
@@ -228,7 +220,7 @@ class JsonSettings(
 
         return when {
             settings.has(key) -> runCatching {
-                json.decodeFromString<T>(settings.getString(key))
+                AppJson.decodeFromString<T>(settings.getString(key))
             }.getOrNull() ?: defaultValue
             else -> defaultValue
         }
@@ -241,7 +233,7 @@ class JsonSettings(
      */
     inline fun <reified T> setObject(key: String, value: T) {
         cache[key] = value as Any
-        val stringJson = json.encodeToString(value)
+        val stringJson = AppJson.encodeToString(value)
         putObject(key, if (stringJson.startsWith("{")) JSONObject(stringJson) else JSONArray(stringJson))
     }
 }

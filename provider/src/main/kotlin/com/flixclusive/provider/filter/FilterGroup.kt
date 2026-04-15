@@ -6,11 +6,11 @@ package com.flixclusive.provider.filter
  * @param name The name of the filter.
  * @param list The list of filters in the group.
  */
-@Suppress("unused")
 open class FilterGroup(
     val name: String,
     val list: List<Filter<*>>
 ) : List<Filter<*>> by list {
+    @Suppress("unused")
     constructor(
         name: String,
         vararg list: Filter<*>,

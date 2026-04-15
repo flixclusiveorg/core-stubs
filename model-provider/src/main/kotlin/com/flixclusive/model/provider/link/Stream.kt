@@ -9,7 +9,8 @@ import java.io.Serializable
  * @property url The url that links to the stream
  * @property name The detailed name of the stream link.
  * @property description The detailed description of the stream. Default is null
- * @property flags A set of resource [Flag]s associated with the subtitle. Default is null
+ * @property flags A set of resource [Flag]s associated with the stream. Use [Flag.ThirdPartyGateway]
+ * when the URL redirects/handoffs to another streaming site. Default is null.
  *
  * */
 data class Stream(

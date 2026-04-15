@@ -40,7 +40,7 @@ enum class FilmReleaseStatus {
 /**
  * An abstract representation of a film.
  *
- * @property id The ID of the film. Check out [Film.identifier] as it is more reliable than calling this one.
+ * @property id The stable unique ID of the film. Providers must always supply this value.
  * @property filmType The type of film. Could either be [FilmType.MOVIE] or [FilmType.TV_SHOW].
  * @property overview An overview, sypnosis or description of the film.
  * @property adult Indicates whether the film is for adults only.
@@ -62,7 +62,7 @@ enum class FilmReleaseStatus {
  * @property releaseDate The release date of the film.
  * @property year The year of the film's release (optional).
  * @property releaseStatus The release status of the film. See [FilmReleaseStatus].
- * @property identifier A unique identifier for the film. It could either be [id], [tmdbId], [imdbId], or [title] in the following sequential order.
+ * @property identifier A deprecated alias of [id].
  * @property year The year of the film's release, extracted from the release date.
  * @property isFromTmdb Indicates whether the film is from TMDB (optional).
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
@@ -72,7 +72,7 @@ enum class FilmReleaseStatus {
  */
 @Serializable
 abstract class Film : java.io.Serializable {
-    abstract val id: String?
+    abstract val id: String
     /** @see FilmType */
     abstract val filmType: FilmType
     abstract val overview: String?
@@ -148,8 +148,12 @@ abstract class Film : java.io.Serializable {
             }
         }
 
+    @Deprecated(
+        message = "Use id instead. Film.id is now required and stable.",
+        replaceWith = ReplaceWith("id"),
+    )
     val identifier: String
-        get() = id ?: effectiveSourceIds[TMDB] ?: effectiveSourceIds[IMDB] ?: title
+        get() = id
 
     val isFromTmdb: Boolean
         get() = effectiveSourceIds.containsKey(TMDB) || providerId.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)

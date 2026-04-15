@@ -1,24 +1,28 @@
 package com.flixclusive.provider
 
 import android.content.Context
-import android.webkit.WebView
-import androidx.annotation.MainThread
 import com.flixclusive.model.film.Film
-import com.flixclusive.model.film.FilmDetails
+import com.flixclusive.model.film.FilmIdSource
 import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.FilmSearchItem
 import com.flixclusive.model.film.Movie
 import com.flixclusive.model.film.SearchResponseData
 import com.flixclusive.model.film.TvShow
 import com.flixclusive.model.film.common.tv.Episode
+import com.flixclusive.model.film.util.FilmType
 import com.flixclusive.model.provider.ProviderCatalog
+import com.flixclusive.model.provider.ProviderCatalogList
 import com.flixclusive.model.provider.link.MediaLink
 import com.flixclusive.model.provider.link.Stream
 import com.flixclusive.model.provider.link.Subtitle
+import com.flixclusive.provider.capability.api.CatalogProviderApi
+import com.flixclusive.provider.capability.api.CrossMatchProviderApi
+import com.flixclusive.provider.capability.api.LinkProviderApi
+import com.flixclusive.provider.capability.api.MetadataProviderApi
+import com.flixclusive.provider.capability.api.SearchProviderApi
 import com.flixclusive.provider.filter.Filter
 import com.flixclusive.provider.filter.FilterList
 import com.flixclusive.provider.util.DefaultTestFilm.getDefaultTestFilm
-import com.flixclusive.provider.webview.ProviderWebView
 import okhttp3.OkHttpClient
 
 /**
@@ -27,23 +31,35 @@ import okhttp3.OkHttpClient
  * An api will provide content based on configurations. It could also be used to search for films and retrieve detailed information about them.
  *
  * @property client The dirty [OkHttpClient] instance used for network requests.
- * @property provider The [Provider] object representing the provider's information.
+ * @property provider The [ProviderPlugin] object representing the provider's information.
  *
  * @property baseUrl The base URL used for network requests. Defaults to an empty string.
  * @property testFilm The [Film] to use for testing purposes. Defaults to [The Godfather (1972)](https://www.themoviedb.org/movie/238-the-godfather).
  * @property catalogs The list of [ProviderCatalog]s that this provider provides. Defaults to an empty list.
  * @property filters The list of [Filter]s that this provider's search method supports. Defaults to an empty list.
  */
-@Suppress("unused")
+@Suppress("unused", "DEPRECATION")
+@Deprecated(
+    message = "ProviderApi is the legacy all-in-one API manager. Prefer capability-specific APIs exposed by capability provider/factory interfaces.",
+    level = DeprecationLevel.WARNING,
+)
 abstract class ProviderApi(
     val client: OkHttpClient,
-    val provider: Provider
-) {
+    val provider: ProviderPlugin
+) : CatalogProviderApi,
+    SearchProviderApi,
+    MetadataProviderApi,
+    CrossMatchProviderApi,
+    LinkProviderApi {
     constructor(
         client: OkHttpClient = OkHttpClient()
     ) : this(
         client = client,
-        provider = object : Provider() {
+        provider = object : ProviderPlugin() {
+            @Deprecated(
+                message = "Legacy compact API factory. Implement capability provider/factory interfaces with explicit get*Api methods instead.",
+                level = DeprecationLevel.WARNING,
+            )
             override fun getApi(context: Context, client: OkHttpClient): ProviderApi {
                 throw IllegalAccessException("This is a stub class and should not be used directly.")
             }
@@ -52,8 +68,10 @@ abstract class ProviderApi(
 
     open val baseUrl: String = ""
     open val testFilm: FilmMetadata = getDefaultTestFilm()
-    open val filters: FilterList get() = FilterList()
-    open val catalogs: List<ProviderCatalog> get() = emptyList()
+    override val filters: FilterList get() = FilterList()
+    override val catalogs: List<ProviderCatalog> get() = emptyList()
+    override val catalogGroups: ProviderCatalogList = ProviderCatalogList()
+    override val supportedIdSources: Set<FilmIdSource> get() = emptySet()
 
     /**
      * Obtains a list of [Film] items from the provider's [catalogs].
@@ -63,123 +81,106 @@ abstract class ProviderApi(
      * @return A list of [FilmSearchItem] objects representing the films in the catalog.
      * By default, returns an empty list.
      */
-    open suspend fun getCatalogItems(
+    override suspend fun getCatalogItems(
         catalog: ProviderCatalog,
-        page: Int = 1
+        page: Int
     ): SearchResponseData<FilmSearchItem>
         = throw NotImplementedError()
 
-    /**
-     * Searches for films based on the provided criteria.
-     *
-     * @param title The title of the film to search for.
-     * @param id The ID of the film to search for (optional).
-     * @param tmdbId The TMDB ID of the film to search for (optional).
-     * @param imdbId The IMDB ID of the film to search for (optional).
-     * @param page The page number of the search results (optional, defaults to 1).
-     * @param filters A list of filters to apply to the search (optional, defaults to an empty list).
-     *
-     * @return A [SearchResponseData] object containing the search results.
-     */
-    open suspend fun search(
+    override suspend fun search(
         title: String,
-        page: Int = 1,
-        id: String? = null,
-        imdbId: String? = null,
-        tmdbId: Int? = null,
-        filters: FilterList = this.filters,
+        page: Int,
+        filters: FilterList,
     ): SearchResponseData<FilmSearchItem>
         = throw NotImplementedError()
+
+    @Deprecated(
+        message = "ID-based search parameters are deprecated. Use search(title, page, filters) and CrossMatchProviderApi.getById(...) instead.",
+        replaceWith = ReplaceWith("search(title = title, page = page, filters = filters)"),
+        level = DeprecationLevel.WARNING,
+    )
+    override suspend fun search(
+        title: String,
+        page: Int,
+        id: String?,
+        imdbId: String?,
+        tmdbId: Int?,
+        filters: FilterList,
+    ): SearchResponseData<FilmSearchItem>
+        = search(
+            title = title,
+            page = page,
+            filters = filters,
+        )
 
     /**
      * Retrieves detailed information about a film.
      * @param film The [Film] object of the film to retrieve details for.
      * @return a [FilmMetadata] instance containing the film's information. It could either be a [Movie] or [TvShow].
      */
-    open suspend fun getMetadata(film: Film): FilmMetadata
+    override suspend fun getMetadata(film: Film): FilmMetadata
         = throw NotImplementedError()
 
-    /**
-     * Retrieves detailed information about a film.
-     * @param film The [Film] object of the film to retrieve details for.
-     * @return a [FilmDetails] instance containing the film's information. It could either be a [Movie] or [TvShow].
-     */
+    override suspend fun getById(
+        sourceIds: Map<FilmIdSource, String>,
+        filmType: FilmType?,
+        year: Int?,
+    ): FilmMetadata? = null
+
+    override suspend fun getByFuzzy(
+        title: String,
+        sourceIds: Map<FilmIdSource, String>,
+        filmType: FilmType?,
+        year: Int?,
+    ): FilmMetadata? = null
+
+    override suspend fun getLinks(
+        film: FilmMetadata,
+        episode: Episode?,
+        onLinkFound: (MediaLink) -> Unit
+    ): Unit = throw NotImplementedError()
+
     @Deprecated(
-        message = "Use getMetadata instead",
-        replaceWith = ReplaceWith("getMetadata(film)")
+        message = "watchId has been removed from getLinks. Use getLinks(film, episode, onLinkFound) instead.",
+        replaceWith = ReplaceWith("getLinks(film = film, episode = episode, onLinkFound = onLinkFound)"),
+        level = DeprecationLevel.WARNING,
     )
-    open suspend fun getFilmDetails(film: Film): FilmDetails
-        = throw NotImplementedError()
-
-    /**
-     * Obtains resource links for the provided film, season, and episode.
-     *
-     * @param watchId The unique watch identifier for the film.
-     * @param film The detailed film object of the film. Notice that it is a [FilmMetadata] and not a [Film] object, this means that this film object has full details and not just the partial info of it. It could either be a [Movie] or [TvShow].
-     * @param episode The [Episode] object of the episode. Defaults to null for movies.
-     * @param onLinkFound A callback function that is invoked when a [Stream] or [Subtitle] is found.
-     *
-     * @return a list of [MediaLink] objects representing the links for the film.
-     */
     open suspend fun getLinks(
         watchId: String,
         film: FilmMetadata,
         episode: Episode? = null,
-        onLinkFound: (MediaLink) -> Unit
-    ): Unit = throw NotImplementedError()
+        onLinkFound: (MediaLink) -> Unit,
+    ) {
+        getLinks(
+            film = film,
+            episode = episode,
+            onLinkFound = onLinkFound,
+        )
+    }
 
-    /**
-     * Obtains resource links for the provided film, season, and episode.
-     *
-     * @param watchId The unique watch identifier for the film.
-     * @param film The detailed film object of the film. Notice that it is a [FilmDetails] and not a [Film] object, this means that this film object has full details and not just the partial info of it. It could either be a [Movie] or [TvShow].
-     * @param episode The [Episode] object of the episode. Defaults to null for movies.
-     * @param onLinkFound A callback function that is invoked when a [Stream] or [Subtitle] is found.
-     *
-     * @return a list of [MediaLink] objects representing the links for the film.
-     */
-    @Deprecated(
-        message = "Use the other getLinks instead that uses FilmMetadata",
-        replaceWith = ReplaceWith("getLinks(watchId, film, episode, onLinkFound)")
-    )
-    open suspend fun getLinks(
-        watchId: String,
-        film: FilmDetails,
+    open suspend fun getStreams(
+        film: FilmMetadata,
         episode: Episode? = null,
-        onLinkFound: (MediaLink) -> Unit
-    ): Unit = throw NotImplementedError()
-}
+        onStreamFound: (Stream) -> Unit
+    ) {
+        getLinks(
+            film = film,
+            episode = episode,
+        ) { mediaLink ->
+            (mediaLink as? Stream)?.let(onStreamFound)
+        }
+    }
 
-
-/**
- * The base class for every provider api that uses a [WebView].
- *
- * An api will provide source links for a given film. It could also be used to search for films and retrieve detailed information about them.
- *
- * @property client The dirty [OkHttpClient] instance used for network requests.
- * @property provider The [Provider] object representing the provider's information.
- *
- * @property baseUrl The base URL used for network requests. Defaults to an empty string.
- * @property testFilm The [Film] to use for testing purposes. Defaults to [The Godfather (1972)](https://www.themoviedb.org/movie/238-the-godfather).
- * @property catalogs The list of [ProviderCatalog]s that this provider provides. Defaults to an empty list.
- * @property filters The list of [Filter]s that this provider's search method supports. Defaults to an empty list.
- */
-abstract class ProviderWebViewApi(
-    client: OkHttpClient,
-    provider: Provider,
-    val context: Context,
-) : ProviderApi(
-    client = client,
-    provider = provider
-) {
-    /**
-     * **WARNING: THIS MUST ONLY BE CALLED ON THE MAIN THREAD.**
-     *
-     * Gets the WebView instance for this provider api. It also must use the [context] property to instantiate the [ProviderWebView].
-     *
-     * @return A [ProviderWebView] instance for this provider.
-     * */
-    @MainThread
-    open fun getWebView(): ProviderWebView
-        = throw NotImplementedError("This provider indicates that it uses a WebView but does not provide one. Make it make sense!")
+    open suspend fun getSubtitles(
+        film: FilmMetadata,
+        episode: Episode? = null,
+        onSubtitleFound: (Subtitle) -> Unit
+    ) {
+        getLinks(
+            film = film,
+            episode = episode,
+        ) { mediaLink ->
+            (mediaLink as? Subtitle)?.let(onSubtitleFound)
+        }
+    }
 }

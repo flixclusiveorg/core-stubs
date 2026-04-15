@@ -1,10 +1,10 @@
 package com.flixclusive.provider.settings
 
-import com.flixclusive.provider.Provider
+import com.flixclusive.provider.ProviderPlugin
 
 /**
  *
- * Settings manager for a [Provider]
+ * Settings manager for a [ProviderPlugin]
  *
  * @see [SettingsAPI](https://github.com/Aliucord/Aliucord/blob/main/Aliucord/src/main/java/com/aliucord/api/SettingsAPI.java)
  * @see JsonSettings

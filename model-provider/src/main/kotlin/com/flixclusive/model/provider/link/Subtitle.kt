@@ -13,7 +13,8 @@ import java.io.Serializable
  * @property url The URL of the subtitle.
  * @property language The language of the subtitle.
  * @property type The source type of the subtitle, indicating whether it's online, local, or embedded. Default is [SubtitleSource.ONLINE]
- * @property flags A set of resource [Flag]s associated with the subtitle. Default is null
+ * @property flags A set of resource [Flag]s associated with the subtitle.
+ * Shared link flags are supported (for example [Flag.RequiresAuth]). Default is null.
  *
  * @property name The name of the subtitle, derived from the [language].
  */

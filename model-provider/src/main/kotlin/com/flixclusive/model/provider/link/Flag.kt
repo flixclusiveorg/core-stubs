@@ -1,11 +1,13 @@
 package com.flixclusive.model.provider.link
 
+
 /**
  * Represents a flag associated with a URL.
  *
  * @see IPLocked
  * @see Expires
  * @see RequiresAuth
+ * @see ThirdPartyGateway
  * @see Trusted
  */
 sealed class Flag {
@@ -29,6 +31,21 @@ sealed class Flag {
     data class RequiresAuth(val customHeaders: Map<String, String>?) : Flag()
 
     /**
+     * Indicates that the media link redirects/handoffs to another streaming site.
+     *
+     * @property name Human-readable gateway name.
+     * @property url Destination URL.
+     * @property logo Optional logo/icon URL.
+     * @property description Optional short description for UI.
+     */
+    data class ThirdPartyGateway(
+        val name: String,
+        val url: String,
+        val logo: String? = null,
+        val description: String? = null,
+    ) : Flag()
+
+    /**
      * Indicates that the media link comes from a trusted and reputable provider.
      *
      * @property name The name of the trusted provider, e.g., "Netflix", "Amazon Prime".
@@ -39,6 +56,11 @@ sealed class Flag {
      * @property category The category of the provider, e.g., "Streaming Service".
      * @property contact Contact information for support or inquiries related to the provider.
      */
+    @Deprecated(
+        message = "Use ThirdPartyGateway for cross-site handoff metadata instead of Trusted.",
+        replaceWith = ReplaceWith("ThirdPartyGateway(name = name, url = url ?: \"\", logo = logo, description = description)"),
+        level = DeprecationLevel.WARNING,
+    )
     data class Trusted(
         val name: String,
         val logo: String? = null,

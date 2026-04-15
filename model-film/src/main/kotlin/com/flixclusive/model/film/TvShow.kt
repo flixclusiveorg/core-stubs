@@ -42,7 +42,7 @@ import kotlinx.serialization.Serializable
  * */
 @Serializable
 data class TvShow(
-    override val id: String?,
+    override val id: String,
     override val title: String,
     override val posterImage: String?,
     override val homePage: String?,

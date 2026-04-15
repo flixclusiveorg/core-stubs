@@ -23,8 +23,6 @@ object DefaultTestFilm {
                 FilmIdSource.TMDB to "238",
                 FilmIdSource.IMDB to "tt0068646"
             ),
-            tmdbId = 238,
-            imdbId = "tt0068646",
             title = "The Godfather",
             rating = 8.691,
             year = 1972,

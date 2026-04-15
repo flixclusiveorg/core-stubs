@@ -2,7 +2,6 @@ package com.flixclusive.provider.util.res
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
@@ -20,6 +19,9 @@ import androidx.compose.ui.res.ResourceResolutionException
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.createBitmap
+import com.flixclusive.provider.R
+
 
 /**
  * An exception thrown when a resource is not found through reflection.
@@ -32,6 +34,7 @@ class ProviderNoResourceFoundException(
     type: String
 ) : Exception("The $type resource $name was not found. Please check the resource name in your provider.")
 
+
 /**
  *
  * A reflective way to get drawable from resources.
@@ -40,8 +43,8 @@ class ProviderNoResourceFoundException(
  * @param packageName The package where the resources are contained. This is usually in BuildConfig.LIBRARY_PACKAGE_NAME
  *
  * @return The drawable if found, null otherwise.
- * @throws ProviderNoResourceFoundException If the resource is not found.
  * */
+@SuppressLint("DiscouragedApi")
 fun Resources.getDrawable(
     name: String,
     packageName: String,
@@ -49,10 +52,7 @@ fun Resources.getDrawable(
     val id = getIdentifier(name, "drawable", packageName)
 
     if (id == 0) {
-        throw ProviderNoResourceFoundException(
-            name = name,
-            type = "drawable"
-        )
+        return null
     }
 
     return ResourcesCompat.getDrawable(this, id, null)
@@ -66,7 +66,6 @@ fun Resources.getDrawable(
  * @param packageName The package where the resources are contained. This is usually in BuildConfig.LIBRARY_PACKAGE_NAME
  *
  * @return The string if found, null otherwise.
- * @throws ProviderNoResourceFoundException If the resource is not found.
  * */
 fun Resources.getString(
     name: String,
@@ -75,10 +74,7 @@ fun Resources.getString(
     val id = getIdentifier(name, "string", packageName)
 
     if (id == 0) {
-        throw ProviderNoResourceFoundException(
-            name = name,
-            type = "string"
-        )
+        return "MISSING STRING RES: $name"
     }
 
     return getString(id)
@@ -101,9 +97,7 @@ val LocalResources = compositionLocalOf<Resources> {
  * */
 fun Drawable.getBitmapFromImage(): ImageBitmap {
     // in below line we are creating our bitmap and initializing it.
-    val bit = Bitmap.createBitmap(
-        intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888
-    )
+    val bit = createBitmap(intrinsicWidth, intrinsicHeight)
 
     // on below line we are
     // creating a variable for canvas.
@@ -128,7 +122,6 @@ fun Drawable.getBitmapFromImage(): ImageBitmap {
  * @param packageName The package name of the resource.
  *
  * @return A painter for the resource.
- * @throws ProviderNoResourceFoundException If the resource is not found.
  * */
 @SuppressLint("DiscouragedApi")
 @Composable
@@ -136,12 +129,14 @@ fun painterResource(name: String, packageName: String): Painter {
     val res = LocalResources.current
     val context = LocalContext.current
 
-    val id = res.getIdentifier(name, "drawable", packageName)
+    var id = res.getIdentifier(name, "drawable", packageName)
     if (id == 0) {
-        throw ProviderNoResourceFoundException(
-            name = name,
-            type = "drawable"
-        )
+        id = R.drawable.missing_drawable
+    }
+
+    if (id == 0) {
+        val emptyBitmap = ImageBitmap(1, 1)
+        return BitmapPainter(emptyBitmap)
     }
 
     val value = remember { TypedValue() }

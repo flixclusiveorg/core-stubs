@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class FilmSearchItem(
-    override val id: String?,
+    override val id: String,
     override val providerId: String,
     /** @see FilmType */
     override val filmType: FilmType,

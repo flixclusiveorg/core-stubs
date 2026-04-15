@@ -2,6 +2,21 @@
 
 This contains all model/entity classes that are used by the provider system. This mainly includes media and provider information entities.
 
+## Link flag migration
+
+For media links that redirect/handoff to another streaming site, use:
+- `Flag.ThirdPartyGateway(name, url, logo, description)`
+
+`Flag.Trusted` is deprecated and kept temporarily for compatibility.
+
+## Catalog model migration
+
+`Catalog` is deprecated.
+
+Use `ProviderCatalog` as the canonical catalog model. Legacy bridge helpers are available:
+- `ProviderCatalog.toLegacyCatalog()`
+- `Catalog.toProviderCatalog(providerId)`
+
 ## Use as a dependency
 
 **Step 1.** Add the JitPack repository to your build file

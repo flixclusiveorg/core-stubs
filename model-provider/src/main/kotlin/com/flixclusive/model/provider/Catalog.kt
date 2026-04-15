@@ -19,6 +19,11 @@ const val DEFAULT_CATALOG_MEDIA_TYPE = "all"
  * @property canPaginate Indicates whether the catalog supports pagination.
  * @property mediaType The type of media contained in the catalog, defaulting to "all".
  */
+@Deprecated(
+    message = "Catalog is deprecated. Use ProviderCatalog as the canonical model.",
+    replaceWith = ReplaceWith("ProviderCatalog"),
+    level = DeprecationLevel.WARNING,
+)
 @Serializable
 abstract class Catalog : java.io.Serializable {
     abstract val name: String
@@ -33,4 +38,60 @@ abstract class Catalog : java.io.Serializable {
      */
     @Deprecated("Don't use this anymore. It will be removed in the future.")
     open val mediaType: String get() = DEFAULT_CATALOG_MEDIA_TYPE
+}
+
+/**
+ * Legacy compatibility model for converting [ProviderCatalog] instances to the deprecated [Catalog] base type.
+ */
+@Deprecated(
+    message = "Use ProviderCatalog directly.",
+    replaceWith = ReplaceWith("ProviderCatalog"),
+    level = DeprecationLevel.WARNING,
+)
+@Suppress("DEPRECATION")
+@Serializable
+data class LegacyCatalog(
+    override val name: String,
+    override val url: String,
+    override val canPaginate: Boolean,
+    override val image: String? = null,
+    val providerId: String = "",
+) : Catalog()
+
+/**
+ * Converts [ProviderCatalog] to a deprecated [Catalog] instance for legacy integrations.
+ */
+@Deprecated(
+    message = "Catalog is deprecated. Use ProviderCatalog directly whenever possible.",
+    replaceWith = ReplaceWith("this"),
+    level = DeprecationLevel.WARNING,
+)
+@Suppress("DEPRECATION")
+fun ProviderCatalog.toLegacyCatalog(): Catalog {
+    return LegacyCatalog(
+        name = name,
+        url = url,
+        canPaginate = canPaginate,
+        image = image,
+        providerId = providerId,
+    )
+}
+
+/**
+ * Converts deprecated [Catalog] values back to [ProviderCatalog].
+ */
+@Deprecated(
+    message = "Catalog is deprecated. Use ProviderCatalog directly whenever possible.",
+    replaceWith = ReplaceWith("ProviderCatalog(name, url, canPaginate, image, providerId)"),
+    level = DeprecationLevel.WARNING,
+)
+@Suppress("DEPRECATION")
+fun Catalog.toProviderCatalog(providerId: String = (this as? LegacyCatalog)?.providerId.orEmpty()): ProviderCatalog {
+    return ProviderCatalog(
+        name = name,
+        url = url,
+        canPaginate = canPaginate,
+        image = image,
+        providerId = providerId,
+    )
 }
