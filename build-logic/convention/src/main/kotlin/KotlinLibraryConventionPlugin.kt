@@ -9,17 +9,17 @@ class KotlinLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+                apply("org.jetbrains.kotlin.jvm")
                 apply("java-library")
                 apply("maven-publish")
                 apply("org.jetbrains.dokka")
-                apply("org.jetbrains.kotlin.jvm")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             configureKotlinJvm()
 
             dependencies {
-                add("implementation", libs.findLibrary("kotlinx-serialization").get())
+                add("compileOnly", libs.findLibrary("kotlinx-serialization").get())
             }
         }
     }

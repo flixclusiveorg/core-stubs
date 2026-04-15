@@ -1,14 +1,14 @@
 package com.flixclusive
 
-import com.android.build.gradle.BaseExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 @Suppress("UnstableApiUsage")
 internal fun Project.configureAndroidCompose(
-    commonExtension: BaseExtension,
+    libraryExtension: LibraryExtension,
 ) {
-    commonExtension.apply {
+    libraryExtension.apply {
         buildFeatures.apply {
             compose = true
             viewBinding = true
@@ -16,8 +16,8 @@ internal fun Project.configureAndroidCompose(
 
         dependencies {
             val bom = libs.findLibrary("compose-bom").get()
-            add("implementation", platform(bom))
-            add("androidTestImplementation", platform(bom))
+            add("compileOnly", platform(bom))
+            add("androidTestCompileOnly", platform(bom))
         }
     }
 }

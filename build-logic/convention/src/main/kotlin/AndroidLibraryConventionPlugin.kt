@@ -13,12 +13,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("maven-publish")
                 apply("org.jetbrains.dokka")
-                apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             extensions.configure<LibraryExtension> {
-                configureKotlinAndroid(commonExtension = this)
+                configureKotlinAndroid(libraryExtension = this)
 
                 publishing {
                     singleVariant("release") {
@@ -28,7 +27,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
-                add("implementation", libs.findLibrary("kotlinx-serialization").get())
+                add("compileOnly", libs.findLibrary("kotlinx-serialization").get())
             }
         }
     }

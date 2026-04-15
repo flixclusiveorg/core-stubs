@@ -1,9 +1,9 @@
 
-import com.android.build.gradle.BaseExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.flixclusive.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.configure
 
 class ComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -12,9 +12,9 @@ class ComposeConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
-            val extension = extensions.getByType<BaseExtension>()
-            configureAndroidCompose(extension)
+            extensions.configure<LibraryExtension> {
+                configureAndroidCompose(libraryExtension = this)
+            }
         }
     }
-
 }
