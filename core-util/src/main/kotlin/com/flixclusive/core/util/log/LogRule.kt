@@ -31,6 +31,26 @@ class LogRule : TestRule {
                     0
                 }
 
+                every { Log.i(any(), any()) } answers {
+                    println(args[1])
+                    0
+                }
+
+                every { Log.v(any(), any()) } answers {
+                    println(args[1])
+                    0
+                }
+
+                every { Log.w(any(), any<String>()) } answers {
+                    println(args[1])
+                    0
+                }
+
+                every { Log.w(any(), any<Throwable>()) } answers {
+                    println(args[1])
+                    0
+                }
+
                 base?.evaluate()
             }
         }

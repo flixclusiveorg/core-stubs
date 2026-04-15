@@ -13,6 +13,9 @@ import java.io.OutputStream
  * @param dir The directory to calculate the size of.
  * @return The total size of the directory in bytes.
  */
+@Deprecated(
+    message = "This function is deprecated. Implementing your own helper method is recommended."
+)
 fun getDirectorySize(dir: File): Long {
     var size: Long = 0
     dir.listFiles()?.let {
@@ -35,6 +38,9 @@ fun getDirectorySize(dir: File): Long {
  * @param file The file to save the content to.
  * @throws Exception if an error occurs during the save process.
  */
+@Deprecated(
+    message = "This function is deprecated. Implementing your own helper method is recommended."
+)
 fun BufferedSource.saveTo(file: File) {
     try {
         file.parentFile?.mkdirs()
@@ -53,6 +59,9 @@ fun BufferedSource.saveTo(file: File) {
  *
  * @param stream The [OutputStream] to save the content to.
  */
+@Deprecated(
+    message = "This function is deprecated. Implementing your own helper method is recommended."
+)
 fun BufferedSource.saveTo(stream: OutputStream) {
     use { input ->
         stream.sink().buffer().use {

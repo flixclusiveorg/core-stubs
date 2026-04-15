@@ -18,6 +18,10 @@ import java.net.URL
 /**
  * The default User-Agent header value.
  * */
+@Deprecated(
+    message = "Moved to com.flixclusive.core.util.network.okhttp.UserAgentManager. Consider using UserAgentManager.getRandomUserAgent() for more variety in user agents.",
+    replaceWith = ReplaceWith("UserAgentManager.DEFAULT_USER_AGENT")
+)
 const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0"
 
 private const val REQUIRES_BODY_ERROR_MESSAGE = "The method request doesn't require a body. Are you using a function that requires a body?"

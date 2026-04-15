@@ -14,6 +14,10 @@ import android.net.Uri
  * @param uri The [Uri] pointing to the APK file.
  * @return An [Intent] that can be used to start the installation activity.
  */
+
+@Deprecated(
+    message = "This function is deprecated. Implementing your own helper method is recommended."
+)
 fun installApkActivity(uri: Uri): Intent {
     val mime = "application/vnd.android.package-archive"
     return Intent(Intent.ACTION_VIEW).apply {

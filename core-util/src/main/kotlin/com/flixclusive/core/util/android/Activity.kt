@@ -14,6 +14,9 @@ import android.widget.Toast
  * @return An instance of the specified [Activity].
  * @throws IllegalStateException if no matching [Activity] is found.
  */
+@Deprecated(
+    message = "This function is deprecated. Implementing your own helper method is recommended."
+)
 inline fun <reified Activity : android.app.Activity> Context.getActivity(): Activity {
     val activity = when (this) {
         is Activity -> this

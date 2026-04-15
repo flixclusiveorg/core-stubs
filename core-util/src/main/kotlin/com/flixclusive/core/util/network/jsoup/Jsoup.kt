@@ -13,5 +13,9 @@ import java.io.IOException
  * @throws IOException If an I/O error occurs while reading the response body.
  */
 fun Response.asJsoup(html: String? = null): Document {
-    return Jsoup.parse(html ?: body!!.string(), request.url.toString())
+    val toParse = html
+        ?: body.string().takeIf { it.isNotEmpty() }
+        ?: throw NullPointerException("Response body is empty and no HTML provided for parsing.")
+
+    return Jsoup.parse(toParse, request.url.toString())
 }

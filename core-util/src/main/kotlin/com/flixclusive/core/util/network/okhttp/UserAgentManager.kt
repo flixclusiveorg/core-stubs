@@ -2,6 +2,7 @@ package com.flixclusive.core.util.network.okhttp
 
 import com.flixclusive.core.util.exception.safeCall
 import com.flixclusive.core.util.network.json.fromJson
+import com.flixclusive.core.util.network.okhttp.UserAgentManager.Companion.DEFAULT_USER_AGENT
 import okhttp3.OkHttpClient
 import kotlin.random.Random
 
@@ -18,6 +19,8 @@ class UserAgentManager(
 ) {
     @Suppress("MemberVisibilityCanBePrivate", "unused")
     companion object {
+        const val DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0"
+        
         /** List of desktop user agent strings */
         val desktopUserAgents = arrayListOf<String>()
 
@@ -30,7 +33,7 @@ class UserAgentManager(
          * @return A random user agent string, either desktop or mobile.
          *         If no user agents are available, returns a default.
          *
-         * @see USER_AGENT
+         * @see DEFAULT_USER_AGENT
          */
         fun getRandomUserAgent(): String {
             val isDesktop = Random.nextBoolean()
@@ -38,31 +41,31 @@ class UserAgentManager(
             return when {
                 isDesktop -> desktopUserAgents.randomOrNull()
                 else -> mobileUserAgents.randomOrNull()
-            } ?: USER_AGENT
+            } ?: DEFAULT_USER_AGENT
         }
 
         /**
          * Gets a random mobile user agent string.
          *
          * @return A random mobile user agent string.
-         *         If no mobile user agents are available, returns a default USER_AGENT.
+         *         If no mobile user agents are available, returns a default DEFAULT_USER_AGENT.
          *
-         * @see USER_AGENT
+         * @see DEFAULT_USER_AGENT
          */
         fun getRandomMobileUserAgent(): String {
-            return mobileUserAgents.randomOrNull() ?: USER_AGENT
+            return mobileUserAgents.randomOrNull() ?: DEFAULT_USER_AGENT
         }
 
         /**
          * Gets a random desktop user agent string.
          *
          * @return A random desktop user agent string.
-         *         If no desktop user agents are available, returns a default USER_AGENT.
+         *         If no desktop user agents are available, returns a default DEFAULT_USER_AGENT.
          *
-         * @see USER_AGENT
+         * @see DEFAULT_USER_AGENT
          */
         fun getRandomDesktopUserAgent(): String {
-            return desktopUserAgents.randomOrNull() ?: USER_AGENT
+            return desktopUserAgents.randomOrNull() ?: DEFAULT_USER_AGENT
         }
     }
 

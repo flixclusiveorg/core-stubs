@@ -72,7 +72,7 @@ object DoHProvider {
      * */
     fun OkHttpClient.Builder.dohAdGuard() = dns(
         DnsOverHttps.Builder().client(build())
-            .url("https://dns-unfiltered.adguard.com/dns-query".toHttpUrl())
+            .url("https://unfiltered.adguard-dns.com/dns-query".toHttpUrl()) // was dns-unfiltered.adguard.com
             .bootstrapDnsHosts(
                 InetAddress.getByName("94.140.14.140"),
                 InetAddress.getByName("94.140.14.141"),

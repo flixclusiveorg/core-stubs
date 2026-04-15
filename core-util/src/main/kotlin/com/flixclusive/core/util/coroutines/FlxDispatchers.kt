@@ -1,14 +1,14 @@
 package com.flixclusive.core.util.coroutines
 
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.launchOnDefault
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.launchOnIO
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.launchOnMain
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.runOnDefault
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.runOnIO
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.runOnMain
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.withDefaultContext
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.withIOContext
-import com.flixclusive.core.util.coroutines.AppDispatchers.Companion.withMainContext
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.launchOnDefault
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.launchOnIO
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.launchOnMain
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.runOnDefault
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.runOnIO
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.runOnMain
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.withDefaultContext
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.withIOContext
+import com.flixclusive.core.util.coroutines.FlxDispatchers.Companion.withMainContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,14 +28,7 @@ import kotlinx.coroutines.withContext
  * @see IO
  * @see Main
  */
-@Deprecated(
-    replaceWith = ReplaceWith(
-        expression = "FlxDispatchers",
-        imports = ["com.flixclusive.core.util.coroutines.FlxDispatchers"]
-    ),
-    message = "This enum is deprecated. Use FlxDispatchers instead."
-)
-enum class AppDispatchers(
+enum class FlxDispatchers(
     val dispatcher: CoroutineDispatcher,
     val scope: CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
 ) {
