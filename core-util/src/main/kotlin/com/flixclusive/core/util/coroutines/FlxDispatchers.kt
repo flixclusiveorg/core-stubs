@@ -17,6 +17,22 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
+
+/**
+ * Enum class representing different coroutine dispatchers for the application.
+ * Each enum constant encapsulates a [CoroutineDispatcher] and a corresponding [CoroutineScope].
+ *
+ * @see FlxDispatchers
+ */
+@Deprecated(
+    replaceWith = ReplaceWith(
+        expression = "FlxDispatchers",
+        imports = ["com.flixclusive.core.util.coroutines.FlxDispatchers"]
+    ),
+    message = "This enum is deprecated. Use FlxDispatchers instead."
+)
+typealias AppDispatchers = FlxDispatchers
+
 /**
  * Enum class representing different coroutine dispatchers for the application.
  * Each enum constant encapsulates a [CoroutineDispatcher] and a corresponding [CoroutineScope].
