@@ -23,35 +23,4 @@ data class ProviderCatalog(
     val canPaginate: Boolean,
     val image: String? = null,
     val providerId: String
-) : java.io.Serializable {
-    /**
-     * Legacy compatibility alias from deprecated [Catalog.mediaType].
-     */
-    @Deprecated(
-        message = "mediaType is deprecated. Use ProviderCatalog fields directly.",
-        level = DeprecationLevel.WARNING,
-    )
-    val mediaType: String
-        get() = DEFAULT_CATALOG_MEDIA_TYPE
-
-    companion object {
-        /**
-         * Creates [ProviderCatalog] from a deprecated [Catalog] object.
-         */
-        @Deprecated(
-            message = "Catalog is deprecated. Use ProviderCatalog directly whenever possible.",
-            replaceWith = ReplaceWith("catalog.toProviderCatalog(providerId)"),
-            level = DeprecationLevel.WARNING,
-        )
-        @Suppress("DEPRECATION")
-        fun fromCatalog(catalog: Catalog, providerId: String = (catalog as? LegacyCatalog)?.providerId.orEmpty()): ProviderCatalog {
-            return ProviderCatalog(
-                name = catalog.name,
-                url = catalog.url,
-                canPaginate = catalog.canPaginate,
-                image = catalog.image,
-                providerId = providerId,
-            )
-        }
-    }
-}
+) : java.io.Serializable
