@@ -1,5 +1,7 @@
 package com.flixclusive.model.film
 
+import com.flixclusive.model.film.FilmIdSource.IMDB
+import com.flixclusive.model.film.FilmIdSource.TMDB
 import com.flixclusive.model.film.FilmReleaseStatus.COMING_SOON
 import com.flixclusive.model.film.FilmReleaseStatus.RELEASED
 import com.flixclusive.model.film.FilmReleaseStatus.UNKNOWN
@@ -52,6 +54,7 @@ enum class FilmReleaseStatus {
  * @property posterImage The URL to the poster image of the film (optional).
  * @property homePage The URL to the home page of the film (optional).
  * @property providerId The provider id of the provider this film came from.
+ * @property sourceIds A map of external IDs keyed by [FilmIdSource].
  * @property imdbId The IMDB ID of the film (optional).
  * @property tmdbId The TMDB ID of the film (optional).
  * @property logoImage The URL to the logo image of the film (optional).
@@ -88,10 +91,24 @@ abstract class Film : java.io.Serializable {
         get() = emptyList()
     open val providerId: String
         get() = DEFAULT_FILM_SOURCE_NAME
+
+    open val sourceIds: Map<FilmIdSource, String>
+        get() = emptyMap()
+
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
+    )
     open val imdbId: String?
-        get() = null
+        get() = sourceIds[IMDB]
+
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
+    )
     open val tmdbId: Int?
-        get() = null
+        get() = sourceIds[TMDB]?.toIntOrNull()
+
     open val logoImage: String?
         get() = null
     open val parsedReleaseDate: String?
@@ -117,11 +134,25 @@ abstract class Film : java.io.Serializable {
             UNKNOWN
         }
 
+    @Suppress("DEPRECATION")
+    private val effectiveSourceIds: Map<FilmIdSource, String>
+        get() = buildMap {
+            putAll(sourceIds)
+
+            if (!containsKey(TMDB)) {
+                tmdbId?.toString()?.let { put(TMDB, it) }
+            }
+
+            if (!containsKey(IMDB)) {
+                imdbId?.let { put(IMDB, it) }
+            }
+        }
+
     val identifier: String
-        get() = id ?: tmdbId?.toString() ?: imdbId ?: title
+        get() = id ?: effectiveSourceIds[TMDB] ?: effectiveSourceIds[IMDB] ?: title
 
     val isFromTmdb: Boolean
-        get() = this.tmdbId != null || providerId.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)
+        get() = effectiveSourceIds.containsKey(TMDB) || providerId.equals(DEFAULT_FILM_SOURCE_NAME, ignoreCase = true)
 }
 
 

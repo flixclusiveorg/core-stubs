@@ -1,5 +1,7 @@
 package com.flixclusive.model.film
 
+import com.flixclusive.model.film.FilmIdSource.IMDB
+import com.flixclusive.model.film.FilmIdSource.TMDB
 import com.flixclusive.model.film.common.details.Company
 import com.flixclusive.model.film.util.FilmType
 import kotlinx.serialization.Serializable
@@ -43,8 +45,17 @@ data class Movie(
     override val homePage: String?,
     override val backdropImage: String? = null,
     override val logoImage: String? = null,
-    override val tmdbId: Int? = null,
-    override val imdbId: String? = null,
+    override val sourceIds: Map<FilmIdSource, String> = emptyMap(),
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
+    )
+    override val tmdbId: Int? = sourceIds[TMDB]?.toIntOrNull(),
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
+    )
+    override val imdbId: String? = sourceIds[IMDB],
     override val language: String? = null,
     override val releaseDate: String? = null,
     override val rating: Double? = null,

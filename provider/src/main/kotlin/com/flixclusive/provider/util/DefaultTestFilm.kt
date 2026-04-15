@@ -1,6 +1,7 @@
 package com.flixclusive.provider.util
 
 import com.flixclusive.model.film.DEFAULT_FILM_SOURCE_NAME
+import com.flixclusive.model.film.FilmIdSource
 import com.flixclusive.model.film.Movie
 import com.flixclusive.provider.ProviderApi
 
@@ -18,6 +19,10 @@ object DefaultTestFilm {
     fun getDefaultTestFilm(): Movie {
         return Movie(
             id = "238",
+            sourceIds = mapOf(
+                FilmIdSource.TMDB to "238",
+                FilmIdSource.IMDB to "tt0068646"
+            ),
             tmdbId = 238,
             imdbId = "tt0068646",
             title = "The Godfather",

@@ -1,5 +1,7 @@
 package com.flixclusive.model.film
 
+import com.flixclusive.model.film.FilmIdSource.IMDB
+import com.flixclusive.model.film.FilmIdSource.TMDB
 import com.flixclusive.model.film.util.FilmType
 import kotlinx.serialization.Serializable
 
@@ -40,8 +42,17 @@ data class FilmSearchItem(
     override val posterImage: String?,
     override val adult: Boolean = false,
     override val backdropImage: String? = null,
-    override val imdbId: String? = null,
-    override val tmdbId: Int? = null,
+    override val sourceIds: Map<FilmIdSource, String> = emptyMap(),
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
+    )
+    override val imdbId: String? = sourceIds[IMDB],
+    @Deprecated(
+        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
+        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
+    )
+    override val tmdbId: Int? = sourceIds[TMDB]?.toIntOrNull(),
     override val releaseDate: String? = null,
     override val rating: Double? = null,
     override val language: String? = null,

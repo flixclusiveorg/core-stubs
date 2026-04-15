@@ -1,12 +1,6 @@
 # Module model-film
 
-This contains all media model/entity classes used by both the app and the provider system. 
-
-In this package, all media content instances extends the abstract [**Film**](com.flixclusive.model.film.Film.kt) class. This includes both [**FilmDetails**](com.flixclusive.model.film.FilmDetails) and
-[**FilmSearchItem**](com.flixclusive.model.film.FilmSearchItem) classes. 
-
-**FilmDetails** class is a parent class of both [**Movie**](com.flixclusive.model.film.Movie) and
-[**TvShow**](com.flixclusive.model.film.TvShow) while **FilmSearchItem** is a single final class only of every search media item results.
+This contains all media model/entity classes used by both the app and the provider system.
 
 ## Use as a dependency
 
