@@ -10,13 +10,15 @@ import kotlinx.serialization.Serializable
  * @param name The repository name.
  * @param url The URL of the repository.
  * @param rawLinkFormat The raw link format used for generating raw links to files in the repository.
+ * @param branch The branch to use when fetching providers (default is "builds").
  */
 @Serializable
 data class Repository(
     val owner: String,
     val name: String,
     val url: String,
-    val rawLinkFormat: String
+    val rawLinkFormat: String,
+    val branch: String = "builds"
 ) {
     /**
      * Generates a raw link to a file in the repository.

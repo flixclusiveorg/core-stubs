@@ -31,5 +31,6 @@ abstract class Catalog : java.io.Serializable {
      * By default, this returns [DEFAULT_CATALOG_MEDIA_TYPE], which is "all".
      * Override this in subclasses to specify a different media type.
      */
+    @Deprecated("Don't use this anymore. It will be removed in the future.")
     open val mediaType: String get() = DEFAULT_CATALOG_MEDIA_TYPE
 }

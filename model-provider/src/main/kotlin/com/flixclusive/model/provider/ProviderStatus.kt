@@ -8,7 +8,7 @@ package com.flixclusive.model.provider
  * @see Beta
  * @see Working
  */
-enum class Status {
+enum class ProviderStatus {
     /** Indicates that the provider is currently down. */
     Down,
 
@@ -21,3 +21,6 @@ enum class Status {
     /** Indicates that the provider is working without issues. */
     Working
 }
+
+@Deprecated("Use ProviderStatus instead.")
+typealias Status = ProviderStatus
