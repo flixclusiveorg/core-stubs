@@ -1,8 +1,7 @@
 
-import com.android.build.gradle.LibraryExtension
-import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import java.net.URL
+import com.android.build.api.dsl.LibraryExtension
+import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
@@ -22,8 +21,10 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
 }
 
-tasks.dokkaHtmlMultiModule {
-    moduleName.set("Provider API Reference")
+dokka {
+    dokkaPublications.html {
+        moduleName.set("Provider API Reference")
+    }
 }
 
 fun Project.publishing(configuration: PublishingExtension.() -> Unit)
@@ -33,8 +34,10 @@ fun Project.android(configuration: LibraryExtension.() -> Unit)
     = extensions.getByName<LibraryExtension>("android").configuration()
 
 subprojects {
+    apply(plugin = "org.jetbrains.dokka")
+
     group = "com.github.flixclusive"
-    version = "1.2.5"
+    version = "1.3.0"
 
     afterEvaluate {
         publishing {
@@ -56,12 +59,12 @@ subprojects {
         }
     }
 
-    tasks.withType<DokkaTaskPartial>().configureEach {
+    extensions.configure<DokkaExtension> {
         dokkaSourceSets.configureEach {
             documentedVisibilities.set(
                 setOf(
-                    DokkaConfiguration.Visibility.PUBLIC,
-                    DokkaConfiguration.Visibility.PROTECTED
+                    VisibilityModifier.Public,
+                    VisibilityModifier.Protected
                 )
             )
 
@@ -77,7 +80,7 @@ subprojects {
                 val sourceSetDir = "src/main/kotlin"
 
                 localDirectory.set(projectDir.resolve(sourceSetDir))
-                remoteUrl.set(URL("$repository/$branch/$projectName/$sourceSetDir"))
+                remoteUrl("$repository/$branch/$projectName/$sourceSetDir")
                 remoteLineSuffix.set("#L")
             }
         }
