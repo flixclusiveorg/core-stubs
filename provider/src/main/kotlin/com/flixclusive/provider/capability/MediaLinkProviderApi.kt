@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Generic capability contract for providers that expose media links.
  */
-interface MediaLinkProviderApi : CapabilityProviderApi {
+interface MediaLinkProviderApi {
     fun getLinks(
         film: FilmMetadata,
         episode: Episode? = null,

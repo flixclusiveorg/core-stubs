@@ -4,29 +4,33 @@ This contains all provider stubs that are used to create a custom provider.
 
 ## Capability-first provider design
 
-Providers expose APIs from the plugin level through `ProviderPlugin.getApi(context)`.
+Providers can expose capability APIs from the plugin level through nullable getters on `ProviderPlugin`.
 
-Capability contracts are now grouped by package:
-- `com.flixclusive.provider.capability.api.*`
-- `com.flixclusive.provider.capability.ext.*`
+Capability contracts are available under:
+- `com.flixclusive.provider.capability.*`
 
 Capability APIs:
 - `CatalogProviderApi`
 - `SearchProviderApi`
 - `MetadataProviderApi`
 - `CrossMatchProviderApi`
-- `MediaLinkProviderApi<T : MediaLink>`
-- `LinkProviderApi`
-- `StreamProviderApi`
-- `SubtitleProviderApi`
+- `MediaLinkProviderApi`
 - `TrackerProviderApi`
 
-Load provider API from a plugin:
+Get capability APIs from a plugin:
 ```kotlin
-val api = plugin.getApi(context)
+val searchApi = plugin.getSearchApi(context)
+val catalogApi = plugin.getCatalogApi(context)
+val metadataApi = plugin.getMetadataApi(context)
+val mediaLinkApi = plugin.getMediaLinkApi(context)
 ```
 
-`ProviderPlugin.getApi(context, client)` is deprecated and kept temporarily for backward compatibility.
+If a capability is not supported by a provider, the getter returns `null`.
+
+`ProviderApi` is deprecated.
+
+Legacy API factory method is still available for backward compatibility:
+- `ProviderPlugin.getApi(context, client)` (deprecated)
 
 ## Use as a dependency
 

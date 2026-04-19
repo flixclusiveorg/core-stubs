@@ -6,7 +6,7 @@ import com.flixclusive.model.provider.ProviderCatalog
 import com.flixclusive.model.provider.ProviderCatalogList
 
 /** Capability contract for catalog browsing APIs. */
-interface CatalogProviderApi : CapabilityProviderApi {
+interface CatalogProviderApi {
     val catalogs: List<ProviderCatalog>
     val catalogGroups: ProviderCatalogList
 

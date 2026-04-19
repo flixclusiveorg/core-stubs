@@ -5,7 +5,7 @@ import com.flixclusive.model.film.SearchResponseData
 import com.flixclusive.provider.filter.FilterList
 
 /** Capability contract for searching APIs. */
-interface SearchProviderApi : CapabilityProviderApi {
+interface SearchProviderApi {
     val filters: FilterList
 
     /**

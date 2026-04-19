@@ -5,7 +5,7 @@ import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.util.FilmType
 
 /** Capability contract for cross-provider metadata matching. */
-interface CrossMatchProviderApi : CapabilityProviderApi {
+interface CrossMatchProviderApi {
     /** External ID sources this provider can resolve for direct cross-matching. */
     val supportedIdSources: Set<FilmIdSource>
         get() = emptySet()

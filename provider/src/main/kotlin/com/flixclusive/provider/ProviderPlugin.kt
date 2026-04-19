@@ -4,6 +4,12 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.compose.runtime.Composable
 import com.flixclusive.model.provider.ProviderManifest
+import com.flixclusive.provider.capability.CatalogProviderApi
+import com.flixclusive.provider.capability.CrossMatchProviderApi
+import com.flixclusive.provider.capability.MediaLinkProviderApi
+import com.flixclusive.provider.capability.MetadataProviderApi
+import com.flixclusive.provider.capability.SearchProviderApi
+import com.flixclusive.provider.capability.TrackerProviderApi
 import com.flixclusive.provider.settings.ProviderSettings
 import okhttp3.OkHttpClient
 
@@ -19,7 +25,7 @@ import okhttp3.OkHttpClient
  * @property settings A [ProviderSettings] instance that holds the provider's settings/preferences.
  *
  * Provider API instances should be managed through your own dependency injection (or equivalent caching)
- * strategy. [getApi] should return stable, reusable API components.
+ * strategy. Capability getters should return stable, reusable API components.
  * */
 @Suppress("PropertyName", "MemberVisibilityCanBePrivate")
 abstract class ProviderPlugin {
@@ -33,22 +39,14 @@ abstract class ProviderPlugin {
     var resources: Resources? = null
 
     /**
-     * Called when the [ProviderPlugin] is loaded.
-     *
-     * @param context The app's context
-     */
-    @Throws(Throwable::class)
-    abstract fun getApi(context: Context): ProviderApi
-
-    /**
      * Legacy API factory overload kept for backward compatibility.
      *
      * @param context The app's context
      * @param client The app's global [OkHttpClient] for network requests
      */
     @Deprecated(
-        message = "Use getApi(context) instead. OkHttpClient parameter is no longer required.",
-        replaceWith = ReplaceWith("getApi(context)"),
+        message = "Returns deprecated ProviderApi. Use capability-specific getters " +
+                "(for example, getSearchApi or getCatalogApi) instead.",
         level = DeprecationLevel.WARNING,
     )
     @Throws(Throwable::class)
@@ -56,9 +54,62 @@ abstract class ProviderPlugin {
         context: Context,
         client: OkHttpClient,
     ): ProviderApi = throw NotImplementedError(
-        "This method is deprecated and should not be used. " +
-                "Please override getApi(context) instead."
+        "This method is deprecated. Override capability-specific getters instead."
     )
+
+    /**
+     * Returns the catalog capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getCatalogApi(context: Context): CatalogProviderApi? =
+        null
+
+    /**
+     * Returns the search capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getSearchApi(context: Context): SearchProviderApi? =
+        null
+
+    /**
+     * Returns the metadata capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getMetadataApi(context: Context): MetadataProviderApi? =
+        null
+
+    /**
+     * Returns the cross-match capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getCrossMatchApi(context: Context): CrossMatchProviderApi? =
+        null
+
+    /**
+     * Returns the media-link capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getMediaLinkApi(context: Context): MediaLinkProviderApi? =
+        null
+
+    /**
+     * Returns the tracker capability API, if supported.
+     *
+     * Override this to expose a dedicated component-based implementation.
+     */
+    @Throws(Throwable::class)
+    open fun getTrackerApi(context: Context): TrackerProviderApi? =
+        null
 
     /**
      * Called before the [ProviderPlugin] is unloaded

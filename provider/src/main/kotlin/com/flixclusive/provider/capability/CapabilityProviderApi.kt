@@ -1,3 +1,0 @@
-package com.flixclusive.provider.capability
-
-sealed interface CapabilityProviderApi
