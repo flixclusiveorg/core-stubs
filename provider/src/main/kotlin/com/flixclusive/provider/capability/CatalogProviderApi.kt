@@ -7,20 +7,10 @@ import com.flixclusive.model.provider.ProviderCatalogList
 
 /** Capability contract for catalog browsing APIs. */
 interface CatalogProviderApi {
-    @Deprecated(
-        message = "Use getCatalogs() instead.",
-        replaceWith = ReplaceWith("getCatalogs()"),
-        level = DeprecationLevel.WARNING,
-    )
-    val catalogs: List<ProviderCatalog>
-    val catalogGroups: ProviderCatalogList
-
     /**
      * Canonical catalogs loader.
-     *
-     * Prefer this over the synchronous [catalogs] property.
      */
-    suspend fun getCatalogs(): List<ProviderCatalog> = catalogs
+    suspend fun getCatalogs(): ProviderCatalogList = ProviderCatalogList()
 
     suspend fun getCatalogItems(
         catalog: ProviderCatalog,

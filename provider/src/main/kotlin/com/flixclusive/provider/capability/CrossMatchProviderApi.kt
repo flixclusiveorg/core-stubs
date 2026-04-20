@@ -8,7 +8,6 @@ import com.flixclusive.model.film.util.FilmType
 interface CrossMatchProviderApi {
     /** External ID sources this provider can resolve for direct cross-matching. */
     val supportedIdSources: Set<FilmIdSource>
-        get() = emptySet()
 
     /**
      * Attempts exact cross-provider matching by trusted source IDs.
@@ -18,8 +17,6 @@ interface CrossMatchProviderApi {
      */
     suspend fun getById(
         sourceIds: Map<FilmIdSource, String>,
-        filmType: FilmType? = null,
-        year: Int? = null,
     ): FilmMetadata?
 
     /**

@@ -25,7 +25,7 @@ val metadataApi = plugin.getMetadataApi(context)
 val mediaLinkApi = plugin.getMediaLinkApi(context)
 
 // Catalog loading is async (preferred)
-val catalogs = catalogApi?.getCatalogs().orEmpty()
+val catalogList = catalogApi?.getCatalogs()
 ```
 
 If a capability is not supported by a provider, the getter returns `null`.
@@ -59,7 +59,7 @@ dependencyResolutionManagement {
 
 **Step 2.** Add the dependency
 
-_The latest version can be found here: [latest tag](https://github/com/flixclusiveorg/core-stubs/releases)_
+_The latest version can be found in the [core-stubs releases page](https://github.com/flixclusiveorg/core-stubs/releases)._ 
 ```kotlin
 dependencies {
     implementation("com.github.flixclusiveorg.core-stubs:provider:$LATEST_CORE_STUBS_VERSION")
