@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 /**
  * Represents the data returned from a search request.
  *
+ * @deprecated Use [PaginatedResponse] instead.
+ *
  * @property page The current page number of the search results.
  * @property results The list of search results for the current page.
  * @property hasNextPage Indicates whether there are more pages of search results available.
@@ -13,10 +15,8 @@ import kotlinx.serialization.Serializable
  *
  * @see FilmSearchItem
  */
-@Serializable
-data class SearchResponseData<T>(
-    val page: Int = 1,
-    val results: List<T> = emptyList(),
-    val hasNextPage: Boolean = false,
-    @SerialName("total_pages") val totalPages: Int = 0
+@Deprecated(
+    message = "Use PaginatedResponse instead.",
+    replaceWith = ReplaceWith("PaginatedResponse<T>"),
 )
+typealias SearchResponseData<T> = PaginatedResponse<T>

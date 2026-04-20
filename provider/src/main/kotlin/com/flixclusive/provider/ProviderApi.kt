@@ -6,7 +6,7 @@ import com.flixclusive.model.film.FilmIdSource
 import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.FilmSearchItem
 import com.flixclusive.model.film.Movie
-import com.flixclusive.model.film.SearchResponseData
+import com.flixclusive.model.film.PaginatedResponse
 import com.flixclusive.model.film.TvShow
 import com.flixclusive.model.film.common.tv.Episode
 import com.flixclusive.model.provider.ProviderCatalog
@@ -68,7 +68,7 @@ abstract class ProviderApi(
     open suspend fun getCatalogItems(
         catalog: ProviderCatalog,
         page: Int
-    ): SearchResponseData<FilmSearchItem>
+    ): PaginatedResponse<FilmSearchItem>
         = throw NotImplementedError()
 
     open suspend fun search(
@@ -78,7 +78,7 @@ abstract class ProviderApi(
         imdbId: String?,
         tmdbId: Int?,
         filters: FilterList,
-    ): SearchResponseData<FilmSearchItem>
+    ): PaginatedResponse<FilmSearchItem>
         = throw NotImplementedError()
 
     /**

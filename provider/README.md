@@ -23,9 +23,18 @@ val searchApi = plugin.getSearchApi(context)
 val catalogApi = plugin.getCatalogApi(context)
 val metadataApi = plugin.getMetadataApi(context)
 val mediaLinkApi = plugin.getMediaLinkApi(context)
+
+// Catalog loading is async (preferred)
+val catalogs = catalogApi?.getCatalogs().orEmpty()
 ```
 
 If a capability is not supported by a provider, the getter returns `null`.
+
+## Pagination
+
+Capability APIs that return paged results use `PaginatedResponse<T>`.
+
+`SearchResponseData<T>` is deprecated.
 
 `ProviderApi` is deprecated.
 
