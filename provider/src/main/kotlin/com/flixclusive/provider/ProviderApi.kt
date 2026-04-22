@@ -9,8 +9,7 @@ import com.flixclusive.model.film.Movie
 import com.flixclusive.model.film.PaginatedResponse
 import com.flixclusive.model.film.TvShow
 import com.flixclusive.model.film.common.tv.Episode
-import com.flixclusive.model.provider.ProviderCatalog
-import com.flixclusive.model.provider.ProviderCatalogList
+import com.flixclusive.model.provider.Catalog
 import com.flixclusive.model.provider.link.MediaLink
 import com.flixclusive.provider.filter.Filter
 import com.flixclusive.provider.filter.FilterList
@@ -27,7 +26,7 @@ import java.util.GregorianCalendar
  *
  * @property baseUrl The base URL used for network requests. Defaults to an empty string.
  * @property testFilm The [Film] to use for testing purposes. Defaults to [The Godfather (1972)](https://www.themoviedb.org/movie/238-the-godfather).
- * @property catalogs The list of [ProviderCatalog]s that this provider provides. Defaults to an empty list.
+ * @property catalogs The list of [Catalog]s that this provider provides. Defaults to an empty list.
  * @property filters The list of [Filter]s that this provider's search method supports. Defaults to an empty list.
  */
 @Deprecated(
@@ -55,18 +54,18 @@ abstract class ProviderApi(
 
     open val filters: FilterList get() = FilterList()
 
-    open val catalogs: List<ProviderCatalog> get() = emptyList()
+    open val catalogs: List<Catalog> get() = emptyList()
 
     /**
      * Obtains a list of [Film] items from the provider's [catalogs].
      *
-     * @param catalog The [ProviderCatalog] to load.
+     * @param catalog The [Catalog] to load.
      * @param page The page number for paginated results. Defaults to 1.
      * @return A list of [FilmSearchItem] objects representing the films in the catalog.
      * By default, returns an empty list.
      */
     open suspend fun getCatalogItems(
-        catalog: ProviderCatalog,
+        catalog: Catalog,
         page: Int
     ): PaginatedResponse<FilmSearchItem>
         = throw NotImplementedError()

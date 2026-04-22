@@ -20,7 +20,7 @@ interface MediaLinkProviderApi {
     /**
      * Declares which types of media links this provider can emit.
      */
-    val provides: Set<MediaLinkType>
+    val supportedLinkTypes: Set<MediaLinkType>
 
     fun getLinks(
         film: FilmMetadata,

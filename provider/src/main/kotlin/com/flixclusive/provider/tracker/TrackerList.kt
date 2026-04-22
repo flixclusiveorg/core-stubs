@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 /**
  * Represents a remote tracker list owned by the authenticated user.
  *
- * This is intentionally distinct from [com.flixclusive.model.provider.ProviderCatalog].
+ * This is intentionally distinct from [com.flixclusive.model.provider.Catalog].
  * Catalogs represent provider browsing surfaces, while tracker lists represent
  * tracker-managed user collections that support CRUD + item mutations.
  * 

@@ -3,39 +3,48 @@ package com.flixclusive.model.provider
 import kotlinx.serialization.Serializable
 
 /**
- * Represents the default media type for the catalog, set to "all".
- * This constant is used when no specific media type is provided.
- */
-const val DEFAULT_CATALOG_MEDIA_TYPE = "all"
-
-/**
- * An abstract class that represents a catalog, _similar to ascrollable row of films in streaming sites_.
+ * Represents a catalog used by providers.
  *
- * The catalog contains information about its name, URL, image, and pagination capabilities.
+ * This is the canonical catalog model for providers.
  *
- * @property name The name of the catalog.
- * @property url The URL for accessing the catalog.
- * @property image An optional image associated with the catalog, typically used for visual representation.
- * @property canPaginate Indicates whether the catalog supports pagination.
- * @property mediaType The type of media contained in the catalog, defaulting to "all".
+ * @property providerId The name of the provider that offers this catalog.
+ * @constructor Initializes a new instance of [Catalog] with the specified name, URL, pagination capability, and provider name.
+ *
+ * @param name The name of the catalog.
+ * @param url The URL for accessing the catalog.
+ * @param mediaType The type of media this catalog represents.
+ * @param canPaginate Indicates whether the catalog supports pagination.
+ * @param image An optional image associated with the catalog (default is null).
+ * @param providerId The name of the provider offering this catalog.
+ * @param description Description shown in the host UI.
+ * @param headers Optional request headers associated with this catalog.
  */
-@Deprecated(
-    message = "Catalog is deprecated. Use ProviderCatalog as the canonical model.",
-    replaceWith = ReplaceWith("ProviderCatalog"),
-    level = DeprecationLevel.WARNING,
-)
 @Serializable
-abstract class Catalog : java.io.Serializable {
-    abstract val name: String
-    abstract val url: String
-    abstract val image: String?
-    abstract val canPaginate: Boolean
-
-    /**
-     * Represents the media type for the catalog.
-     * By default, this returns [DEFAULT_CATALOG_MEDIA_TYPE], which is "all".
-     * Override this in subclasses to specify a different media type.
-     */
-    @Deprecated("Don't use this anymore. It will be removed in the future.")
-    open val mediaType: String get() = DEFAULT_CATALOG_MEDIA_TYPE
+data class Catalog(
+    val name: String,
+    val url: String,
+    val mediaType: CatalogType,
+    val canPaginate: Boolean,
+    val image: String? = null,
+    val providerId: String,
+    val description: String = "",
+    val headers: Map<String, String> = emptyMap(),
+) : java.io.Serializable {
+    constructor(
+        name: String,
+        url: String,
+        mediaType: CatalogType,
+        canPaginate: Boolean,
+        image: String? = null,
+        providerId: String,
+    ) : this(
+        name = name,
+        url = url,
+        mediaType = mediaType,
+        canPaginate = canPaginate,
+        image = image,
+        providerId = providerId,
+        description = "",
+        headers = emptyMap(),
+    )
 }

@@ -10,8 +10,6 @@ import kotlin.reflect.KClass
  * @property flags A list of constraint [Flag]s associated with the media link, such as IP restrictions or expiration.
  * @property description An optional description of the media link.
  * @property customHeaders A map of custom headers associated with the media link if [Flag.RequiresAuth] is present in [flags].
- * @property isThirdPartyGateway True when the link redirects/handoffs to another streaming site.
- * @property thirdPartyGatewayInfo Optional metadata for third-party gateway links.
  *
  * @see Flag
  */
@@ -26,13 +24,6 @@ sealed class MediaLink {
             ?.getOrNull(Flag.RequiresAuth::class)
             ?.customHeaders
 
-    val isThirdPartyGateway: Boolean
-        get() = thirdPartyGatewayInfo != null
-
-    val thirdPartyGatewayInfo: Flag.ThirdPartyGateway?
-        get() = flags
-            ?.getOrNull(Flag.ThirdPartyGateway::class)
-
     companion object {
         /**
          *
@@ -44,6 +35,10 @@ sealed class MediaLink {
          * */
         fun <T : Flag> Set<Flag>.getOrNull(flagType: KClass<T>): T? {
             return this.filterIsInstance(flagType.java).firstOrNull()
+        }
+
+        inline fun <reified T : Flag> MediaLink.getFlagOfType(): T? {
+            return flags?.getOrNull(T::class)
         }
     }
 }

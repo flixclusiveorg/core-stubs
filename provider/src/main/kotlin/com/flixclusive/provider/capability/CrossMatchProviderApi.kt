@@ -1,11 +1,17 @@
 package com.flixclusive.provider.capability
 
+import com.flixclusive.model.film.Film
 import com.flixclusive.model.film.FilmIdSource
 import com.flixclusive.model.film.FilmMetadata
-import com.flixclusive.model.film.util.FilmType
 
 /** Capability contract for cross-provider metadata matching. */
 interface CrossMatchProviderApi {
+    companion object {
+        fun CrossMatchProviderApi.canHandle(film: Film): Boolean {
+            return supportedIdSources.any { it in film.externalIds }
+        }
+    }
+
     /** External ID sources this provider can resolve for direct cross-matching. */
     val supportedIdSources: Set<FilmIdSource>
 
@@ -22,12 +28,12 @@ interface CrossMatchProviderApi {
     /**
      * Attempts fuzzy cross-provider matching when exact ID resolution misses.
      *
+     * The input [film] is expected to come from a different provider than the one
+     * implementing this API.
+     *
      * Returns a best-effort [FilmMetadata] result or null.
      */
     suspend fun getByFuzzy(
-        title: String,
-        sourceIds: Map<FilmIdSource, String> = emptyMap(),
-        filmType: FilmType? = null,
-        year: Int? = null,
+        film: FilmMetadata,
     ): FilmMetadata?
 }

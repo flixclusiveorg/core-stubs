@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -15,6 +14,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.ResourceResolutionException
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
@@ -80,17 +80,7 @@ fun Resources.getString(
     return getString(id)
 }
 
-
 /**
- * A composition local for accessing the provider's resources.
- * This will be usually configured by the app itself.
- * */
-val LocalResources = compositionLocalOf<Resources> {
-    error("LocalResources is not configured!")
-}
-
-/**
- *
  * Converts a drawable to a bitmap.
  *
  * @return A bitmap representation of the drawable.

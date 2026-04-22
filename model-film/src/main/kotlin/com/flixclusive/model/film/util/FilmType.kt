@@ -1,8 +1,5 @@
 package com.flixclusive.model.film.util
 
-import com.flixclusive.model.film.util.FilmType.MOVIE
-import com.flixclusive.model.film.util.FilmType.TV_SHOW
-
 /**
  * Represents the type of a film.
  *
@@ -23,6 +20,9 @@ enum class FilmType(
      * Represents a TV show.
      */
     TV_SHOW(type = "tv");
+
+    val isMovie: Boolean get() = this == MOVIE
+    val isTvShow: Boolean get() = this == TV_SHOW
 
     /**
      * Companion object for [FilmType].
