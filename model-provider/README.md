@@ -15,7 +15,6 @@ For media links that redirect/handoff to another streaming site, use:
 
 Use `Catalog` as the canonical catalog model.
 
-- `Catalog.mediaType` uses `CatalogType` with values: `All`, `Shows`, `Movies`.
 - `ProviderCatalog` remains as a deprecated alias for compatibility.
 
 ## Use as a dependency

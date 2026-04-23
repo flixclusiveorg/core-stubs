@@ -12,7 +12,6 @@ import kotlinx.serialization.Serializable
  *
  * @param name The name of the catalog.
  * @param url The URL for accessing the catalog.
- * @param mediaType The type of media this catalog represents.
  * @param canPaginate Indicates whether the catalog supports pagination.
  * @param image An optional image associated with the catalog (default is null).
  * @param providerId The name of the provider offering this catalog.
@@ -23,7 +22,6 @@ import kotlinx.serialization.Serializable
 data class Catalog(
     val name: String,
     val url: String,
-    val mediaType: CatalogType,
     val canPaginate: Boolean,
     val image: String? = null,
     val providerId: String,
@@ -33,14 +31,12 @@ data class Catalog(
     constructor(
         name: String,
         url: String,
-        mediaType: CatalogType,
         canPaginate: Boolean,
         image: String? = null,
         providerId: String,
     ) : this(
         name = name,
         url = url,
-        mediaType = mediaType,
         canPaginate = canPaginate,
         image = image,
         providerId = providerId,
