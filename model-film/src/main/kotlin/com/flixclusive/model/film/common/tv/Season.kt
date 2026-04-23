@@ -28,7 +28,7 @@ data class Season(
     @SerialName("vote_average") val rating: Double? = null,
     @SerialName("season_number") val number: Int = 0,
     @SerialName("poster_path") val image: String? = null,
-) {
+) : java.io.Serializable {
     /**
      * Indicates whether the season is unreleased. A season is considered unreleased
      * if it has no air date, episode count, and has a rating of 0.0.
