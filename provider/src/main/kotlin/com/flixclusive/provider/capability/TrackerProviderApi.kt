@@ -5,8 +5,8 @@ import com.flixclusive.model.film.FilmMetadata
 import com.flixclusive.model.film.FilmSearchItem
 import com.flixclusive.model.film.PaginatedResponse
 import com.flixclusive.model.film.common.tv.Episode
-import com.flixclusive.provider.tracker.TrackerList
 import com.flixclusive.provider.tracker.ScrobbleAction
+import com.flixclusive.provider.tracker.TrackerList
 
 /**
  * Optional features supported by a [TrackerProviderApi] implementation.
@@ -31,13 +31,18 @@ enum class TrackerFeature {
  * This capability is intended for third-party tracker services (e.g., Trakt/Simkl)
  * that can manage user lists and/or scrobble playback progress.
  *
- * Auth is owned by the provider's SettingsScreen + ProviderSettings. Implementations
- * should throw [com.flixclusive.provider.exception.TrackerAuthRequiredException]
- * when an operation requires authentication but the user is not logged in.
+ * Auth is owned by the provider's SettingsScreen + ProviderSettings.
+ *
+ * The host app should call [isAuthenticated] before invoking operations that require
+ * an authenticated user, and route the user to the provider's SettingsScreen when
+ * authentication is required.
  */
 interface TrackerProviderApi {
 	/** Declares which optional operations are supported by this implementation. */
 	val features: Set<TrackerFeature>
+
+	/** Returns whether the provider is currently authenticated for tracker operations. */
+	suspend fun isAuthenticated(): Boolean
 
 	/**
 	 * Returns the authenticated user's lists.
