@@ -51,7 +51,8 @@ subprojects {
                         if (plugins.hasPlugin("com.android.library")) {
                             from(components["release"])
                         } else {
-                            from(components["kotlin"])
+                            //from(components["kotlin"])
+                            from(components["java"])
                         }
                     }
                 }
