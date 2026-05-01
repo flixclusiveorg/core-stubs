@@ -17,4 +17,5 @@ dependencies {
     compileOnly(libs.compose.runtime)
     compileOnly(libs.compose.ui)
     compileOnly(libs.core.ktx)
+    compileOnly(libs.datastore)
 }

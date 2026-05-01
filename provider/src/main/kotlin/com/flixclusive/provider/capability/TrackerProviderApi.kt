@@ -12,17 +12,11 @@ import com.flixclusive.provider.tracker.TrackerList
  * Optional features supported by a [TrackerProviderApi] implementation.
  */
 enum class TrackerFeature {
-    LISTS_READ,
-    LISTS_CREATE,
-    LISTS_UPDATE,
-    LISTS_DELETE,
+	/** Supports list CRUD + list item management operations. */
+	LIST_MANAGEMENT,
 
-    LIST_ITEMS_READ,
-    LIST_ITEMS_ADD,
-    LIST_ITEMS_REMOVE,
-
-    SCROBBLE_START,
-    SCROBBLE_STOP,
+	/** Supports scrobble operations via [TrackerProviderApi.scrobble]. */
+	SCROBBLE,
 }
 
 /**
@@ -31,18 +25,21 @@ enum class TrackerFeature {
  * This capability is intended for third-party tracker services (e.g., Trakt/Simkl)
  * that can manage user lists and/or scrobble playback progress.
  *
- * Auth is owned by the provider's SettingsScreen + ProviderSettings.
+ * Auth is owned by the provider's SettingsScreen + ProviderPlugin.settings (DataStore<Preferences>).
  *
  * The host app should call [isAuthenticated] before invoking operations that require
  * an authenticated user, and route the user to the provider's SettingsScreen when
  * authentication is required.
  */
 interface TrackerProviderApi {
-	/** Declares which optional operations are supported by this implementation. */
-	val features: Set<TrackerFeature>
+	/** Returns which optional operations are supported by this implementation. */
+	suspend fun getFeatures(): Set<TrackerFeature>
 
 	/** Returns whether the provider is currently authenticated for tracker operations. */
 	suspend fun isAuthenticated(): Boolean
+
+	/** Returns whether the given item exists in any of the authenticated user's lists. */
+	suspend fun isInAnyList(item: Film): Boolean
 
 	/**
 	 * Returns the authenticated user's lists.
@@ -58,8 +55,6 @@ interface TrackerProviderApi {
 	/** Updates list metadata remotely. */
 	suspend fun updateList(
 		list: TrackerList,
-		name: String? = null,
-		description: String? = null,
 	): TrackerList
 
 	/** Deletes a list remotely. */

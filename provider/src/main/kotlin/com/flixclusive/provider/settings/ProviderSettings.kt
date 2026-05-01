@@ -14,6 +14,15 @@ import com.flixclusive.provider.ProviderPlugin
     "MemberVisibilityCanBePrivate",
     "KDocUnresolvedReference"
 )
+@Deprecated(
+    message = "ProviderSettings is deprecated. Use ProviderPlugin.settings (DataStore<Preferences>) instead.",
+    replaceWith = ReplaceWith(
+        "DataStore<Preferences>",
+        "androidx.datastore.core.DataStore",
+        "androidx.datastore.preferences.core.Preferences",
+    ),
+    level = DeprecationLevel.WARNING,
+)
 class ProviderSettings(
     private val fileDirectory: String,
     private val providerId: String,

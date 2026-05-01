@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
  * @property name Name of the list.
  * @property description Optional description of the list.
  * @property itemCount if known, the number of items in this list.
+ * @property images if known, a list of image URLs associated with this list (e.g., a custom list cover image).
  * @property createdAt if known, the date this list was created.
  * @property updatedAt if known, the date this list was last updated.
  * @property url if known, a URL to view this list on the provider's website.
@@ -28,4 +29,5 @@ data class TrackerList(
     val itemCount: Int? = null,
     val createdAt: Long? = null,
     val updatedAt: Long? = null,
+    val images: List<String> = emptyList(),
 )

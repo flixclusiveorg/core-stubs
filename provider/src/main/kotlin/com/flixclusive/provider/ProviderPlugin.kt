@@ -3,6 +3,8 @@ package com.flixclusive.provider
 import android.content.Context
 import android.content.res.Resources
 import androidx.compose.runtime.Composable
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.flixclusive.model.provider.ProviderManifest
 import com.flixclusive.provider.capability.CatalogProviderApi
 import com.flixclusive.provider.capability.CrossMatchProviderApi
@@ -10,7 +12,6 @@ import com.flixclusive.provider.capability.MediaLinkProviderApi
 import com.flixclusive.provider.capability.MetadataProviderApi
 import com.flixclusive.provider.capability.SearchProviderApi
 import com.flixclusive.provider.capability.TrackerProviderApi
-import com.flixclusive.provider.settings.ProviderSettings
 import okhttp3.OkHttpClient
 
 /**
@@ -22,7 +23,7 @@ import okhttp3.OkHttpClient
  * @property resources A [Resources] instance that is used to hold all of the app's resources.
  * @property __filename The filename of the provider.
  *
- * @property settings A [ProviderSettings] instance that holds the provider's settings/preferences.
+ * @property settings A [DataStore] of [Preferences] that holds the provider's settings/preferences.
  *
  * Provider API instances should be managed through your own dependency injection (or equivalent caching)
  * strategy. Capability getters should return stable, reusable API components.
@@ -34,7 +35,7 @@ abstract class ProviderPlugin {
 
     lateinit var __filename: String
     lateinit var manifest: ProviderManifest
-    lateinit var settings: ProviderSettings
+    lateinit var settings: DataStore<Preferences>
 
     var resources: Resources? = null
 
@@ -116,7 +117,9 @@ abstract class ProviderPlugin {
      * @param context Context
      */
     @Throws(Throwable::class)
-    open fun onUnload(context: Context?) = Unit
+    open suspend fun onUnload(context: Context?) {
+
+    }
 
     /**
      *
