@@ -2,16 +2,12 @@ package com.flixclusive.model.media
 
 import com.flixclusive.model.media.common.Genre
 import com.flixclusive.model.media.common.MediaIdSource
+import com.flixclusive.model.media.common.MediaType
 import kotlinx.serialization.Serializable
-
-enum class PartialMediaType {
-    MOVIE,
-    SHOW,
-}
 
 @Serializable
 data class PartialMedia(
-    val type: PartialMediaType,
+    override val type: MediaType,
     override val id: String,
     override val title: String,
     override val providerId: String,
