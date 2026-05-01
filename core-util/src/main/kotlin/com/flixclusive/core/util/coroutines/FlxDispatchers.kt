@@ -168,10 +168,8 @@ enum class FlxDispatchers(
          * @see withIOContext
          * @see runOnIO
          */
-        inline fun launchOnIO(crossinline block: suspend CoroutineScope.() -> Unit) {
-            IO.scope.launch {
-                block()
-            }
+        inline fun launchOnIO(crossinline block: suspend CoroutineScope.() -> Unit) = IO.scope.launch {
+            block()
         }
 
         /**
@@ -182,10 +180,8 @@ enum class FlxDispatchers(
          * @see withDefaultContext
          * @see runOnDefault
          */
-        inline fun launchOnDefault(crossinline block: suspend CoroutineScope.() -> Unit) {
-            Default.scope.launch {
-                block()
-            }
+        inline fun launchOnDefault(crossinline block: suspend CoroutineScope.() -> Unit) = Default.scope.launch {
+            block()
         }
 
         /**
@@ -196,10 +192,8 @@ enum class FlxDispatchers(
          * @see withMainContext
          * @see runOnMain
          */
-        inline fun launchOnMain(crossinline block: suspend CoroutineScope.() -> Unit) {
-            Main.scope.launch {
-                block()
-            }
+        inline fun launchOnMain(crossinline block: suspend CoroutineScope.() -> Unit) = Main.scope.launch {
+            block()
         }
     }
 }
