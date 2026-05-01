@@ -5,9 +5,6 @@ import com.flixclusive.model.media.common.MediaIdSource
 
 /** Capability contract for cross-provider metadata matching. */
 interface CrossMatchProviderApi {
-    /** External ID sources this provider can resolve for direct cross-matching. */
-    val supportedIdSources: Set<MediaIdSource>
-
     /**
      * Attempts exact cross-provider matching by trusted source IDs.
      *
