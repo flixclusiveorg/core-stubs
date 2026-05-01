@@ -1,20 +1,14 @@
 package com.flixclusive.model.provider
 
-import com.flixclusive.model.provider.ProviderType.Companion.All
-import com.flixclusive.model.provider.ProviderType.Companion.Movies
-import com.flixclusive.model.provider.ProviderType.Companion.TvShows
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
-/**
- * Represents the type of content the provider offers.
- *
- * @param type The provider type (e.g., "Movies", "TV Shows", or custom type).
- *
- * @see All
- * @see Movies
- * @see TvShows
- */
-@Serializable
+@Serializable(with = ProviderTypeSerializer::class)
 data class ProviderType(val type: String) {
     companion object {
         /** Quick instance of [ProviderType] for providers that provide all content. */
@@ -28,18 +22,29 @@ data class ProviderType(val type: String) {
     }
 
     override fun equals(other: Any?): Boolean {
-        return when(other) {
+        return when (other) {
             is ProviderType -> other.type.equals(type, true)
             is String -> other.equals(type, true)
-            else -> super.equals(other)
+            else -> false
         }
     }
 
-    override fun toString(): String {
-        return type
+    override fun hashCode(): Int {
+        return type.lowercase().hashCode()
     }
 
-    override fun hashCode(): Int {
-        return type.hashCode() * 31
+    override fun toString(): String = type
+}
+
+internal object ProviderTypeSerializer : KSerializer<ProviderType> {
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("ProviderType", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: ProviderType) {
+        encoder.encodeString(value.type)
+    }
+
+    override fun deserialize(decoder: Decoder): ProviderType {
+        return ProviderType(decoder.decodeString())
     }
 }

@@ -1,7 +1,7 @@
 package com.flixclusive.provider.capability
 
-import com.flixclusive.model.film.FilmMetadata
-import com.flixclusive.model.film.common.tv.Episode
+import com.flixclusive.model.media.MediaMetadata
+import com.flixclusive.model.media.common.tv.Episode
 import com.flixclusive.model.provider.link.MediaLink
 import kotlinx.coroutines.flow.Flow
 
@@ -23,7 +23,7 @@ interface MediaLinkProviderApi {
     val supportedLinkTypes: Set<MediaLinkType>
 
     fun getLinks(
-        film: FilmMetadata,
+        media: MediaMetadata,
         episode: Episode? = null,
     ): Flow<MediaLink>
 }

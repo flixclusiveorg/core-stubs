@@ -23,6 +23,6 @@ dependencyResolutionManagement {
 _The latest version can be found here: [latest tag](https://github.com/flixclusiveorg/core-stubs/releases/latest)_
 ```kotlin
 dependencies {
-    implementation("com.github.flixclusiveorg.core-stubs:model-film:$LATEST_CORE_STUBS_VERSION")
+    implementation("com.github.flixclusiveorg.core-stubs:model-media:$LATEST_CORE_STUBS_VERSION")
 }
 ```

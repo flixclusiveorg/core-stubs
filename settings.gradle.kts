@@ -25,6 +25,6 @@ rootProject.name = "core-stubs"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":core-util")
-include(":model-film")
+include(":model-media")
 include(":model-provider")
 include(":provider")

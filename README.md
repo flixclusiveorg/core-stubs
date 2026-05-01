@@ -5,7 +5,7 @@
 Most data classes, models or entities can be found here.
 
 - [:core-util](./core-util) - contains most utility and common tools that can be used in the app and providers. 
-- [:model-film](./model-film) - contains all model classes that can be considered as stream media (film or shows).
+- [:model-media](./model-media) - contains all model classes that can be considered as stream media (movies or shows).
 - [:model-provider](./model-provider) - contains all the model stubs that will be used on both compilation and runtime of providers.
 - [:provider](./provider) - contains all provider stubs
 

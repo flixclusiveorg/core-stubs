@@ -12,7 +12,7 @@ dependencies {
     compileOnly(libs.okhttp)
     api(projects.coreUtil)
     api(projects.modelProvider)
-    api(projects.modelFilm)
+    api(projects.modelMedia)
 
     compileOnly(libs.compose.runtime)
     compileOnly(libs.compose.ui)

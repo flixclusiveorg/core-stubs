@@ -9,14 +9,13 @@ import com.flixclusive.model.provider.ProviderManifest
 import com.flixclusive.provider.capability.CatalogProviderApi
 import com.flixclusive.provider.capability.CrossMatchProviderApi
 import com.flixclusive.provider.capability.MediaLinkProviderApi
-import com.flixclusive.provider.capability.MetadataProviderApi
+import com.flixclusive.provider.capability.MediaMetadataProviderApi
 import com.flixclusive.provider.capability.SearchProviderApi
 import com.flixclusive.provider.capability.TrackerProviderApi
-import okhttp3.OkHttpClient
 
 /**
  *
- * The base class for all providers. Note that this differs from [ProviderApi], this holds every the detailed information of the provider.
+ * The base class for all providers.
  *
  * @property name The name of the provider.
  * @property manifest A [ProviderManifest] instance that contains the provider's information.
@@ -38,25 +37,6 @@ abstract class ProviderPlugin {
     lateinit var settings: DataStore<Preferences>
 
     var resources: Resources? = null
-
-    /**
-     * Legacy API factory overload kept for backward compatibility.
-     *
-     * @param context The app's context
-     * @param client The app's global [OkHttpClient] for network requests
-     */
-    @Deprecated(
-        message = "Returns deprecated ProviderApi. Use capability-specific getters " +
-                "(for example, getSearchApi or getCatalogApi) instead.",
-        level = DeprecationLevel.WARNING,
-    )
-    @Throws(Throwable::class)
-    open fun getApi(
-        context: Context,
-        client: OkHttpClient,
-    ): ProviderApi = throw NotImplementedError(
-        "This method is deprecated. Override capability-specific getters instead."
-    )
 
     /**
      * Returns the catalog capability API, if supported.
@@ -82,7 +62,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getMetadataApi(context: Context): MetadataProviderApi? =
+    open fun getMetadataApi(context: Context): MediaMetadataProviderApi? =
         null
 
     /**

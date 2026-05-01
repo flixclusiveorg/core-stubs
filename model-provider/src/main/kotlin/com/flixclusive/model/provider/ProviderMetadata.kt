@@ -43,12 +43,3 @@ data class ProviderMetadata(
     val iconUrl: String? = null,
     val adult: Boolean = false,
 )
-
-/**
- * Represents the data associated with a provider.
- */
-@Deprecated(
-    message = "Use ProviderMetadata instead",
-    replaceWith = ReplaceWith("ProviderMetadata")
-)
-typealias ProviderData = ProviderMetadata

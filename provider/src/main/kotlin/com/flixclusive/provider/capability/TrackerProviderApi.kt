@@ -1,10 +1,8 @@
 package com.flixclusive.provider.capability
 
-import com.flixclusive.model.film.Film
-import com.flixclusive.model.film.FilmMetadata
-import com.flixclusive.model.film.FilmSearchItem
-import com.flixclusive.model.film.PaginatedResponse
-import com.flixclusive.model.film.common.tv.Episode
+import com.flixclusive.model.media.MediaMetadata
+import com.flixclusive.model.media.common.PaginatedMedia
+import com.flixclusive.model.media.common.tv.Episode
 import com.flixclusive.provider.tracker.ScrobbleAction
 import com.flixclusive.provider.tracker.TrackerList
 
@@ -39,7 +37,7 @@ interface TrackerProviderApi {
 	suspend fun isAuthenticated(): Boolean
 
 	/** Returns whether the given item exists in any of the authenticated user's lists. */
-	suspend fun isInAnyList(item: Film): Boolean
+	suspend fun isInAnyList(item: MediaMetadata): Boolean
 
 	/**
 	 * Returns the authenticated user's lists.
@@ -64,18 +62,18 @@ interface TrackerProviderApi {
 	suspend fun getListItems(
 		list: TrackerList,
 		page: Int = 1,
-	): PaginatedResponse<FilmSearchItem>
+	): PaginatedMedia<MediaMetadata>
 
 	/** Adds a single item to the given list remotely. */
 	suspend fun addListItem(
 		list: TrackerList,
-		item: Film,
+		item: MediaMetadata,
 	)
 
 	/** Removes a single item from the given list remotely. */
 	suspend fun removeListItem(
 		list: TrackerList,
-		item: Film,
+		item: MediaMetadata,
 	)
 
 	/**
@@ -89,9 +87,9 @@ interface TrackerProviderApi {
 	 */
 	suspend fun scrobble(
 		action: ScrobbleAction,
-		film: FilmMetadata,
-		episode: Episode? = null,
+		media: MediaMetadata,
 		progressPercent: Float,
 		atMs: Long? = null,
+		episode: Episode? = null,
 	)
 }

@@ -1,4 +1,4 @@
-package com.flixclusive.model.film.util
+package com.flixclusive.model.media.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -30,17 +30,6 @@ internal fun parseDate(dateString: String?): Date? {
     return null
 }
 
-
-internal fun dateFromYear(year: Int): Date {
-    val calendar = Calendar.getInstance()
-    calendar.clear()
-    calendar.set(Calendar.YEAR, year)
-    calendar.set(Calendar.MONTH, Calendar.JANUARY)
-    calendar.set(Calendar.DAY_OF_MONTH, 1)
-    return calendar.time
-}
-
-
 internal fun formatDate(date: Date?): String {
     if (date == null) {
         return "No release date"
@@ -64,42 +53,11 @@ internal fun formatDate(dateString: String?): String {
 /**
  * Determines whether the given date represents a date in the future.
  *
- * @param date The date to check.
+ * @param date The date in MS since epoch to check.
  * @return `true` if the date is in the future, `false` otherwise.
  */
-fun isDateInFuture(date: Date): Boolean {
+internal fun isDateInFuture(date: Long): Boolean {
+    val date = Date(date)
     val currentDate = Calendar.getInstance().time
     return date.after(currentDate)
-}
-
-
-@Deprecated(
-    message = "Use isDateInFuture(Date) instead.",
-    replaceWith = ReplaceWith("parseDate(dateString)?.let(::isDateInFuture) ?: false"),
-    level = DeprecationLevel.WARNING,
-)
-fun isDateInFuture(dateString: String): Boolean {
-    return parseDate(dateString)?.let(::isDateInFuture) ?: false
-}
-
-
-/**
- * Extracts the year from a [Date].
- *
- * @return The extracted year as an integer.
- * */
-fun Date.extractYear(): Int {
-    val calendar = Calendar.getInstance()
-    calendar.time = this
-    return calendar.get(Calendar.YEAR)
-}
-
-
-@Deprecated(
-    message = "Use Date.extractYear() instead.",
-    replaceWith = ReplaceWith("parseDate(this)?.extractYear()"),
-    level = DeprecationLevel.WARNING,
-)
-fun String.extractYear(): Int? {
-    return parseDate(this)?.extractYear()
 }

@@ -1,4 +1,4 @@
-package com.flixclusive.model.film
+package com.flixclusive.model.media.common
 
 import com.flixclusive.model.provider.Catalog
 import kotlinx.serialization.Serializable
@@ -8,14 +8,11 @@ import kotlinx.serialization.Serializable
  *
  * This class is serializable using both Kotlin serialization and Java serialization.
  *
- * @property id The unique identifier of the genre (deprecated).
  * @property name The name of the genre.
  * @property catalog Optional catalog reference for navigation.
  */
 @Serializable
 data class Genre(
-    val id: String,
     val name: String,
     val catalog: Catalog? = null,
-) {
-}
+)

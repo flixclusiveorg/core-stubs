@@ -22,25 +22,9 @@ import kotlinx.serialization.Serializable
 data class Catalog(
     val name: String,
     val url: String,
+    val providerId: String,
     val canPaginate: Boolean,
     val image: String? = null,
-    val providerId: String,
-    val description: String = "",
+    val description: String? = null,
     val headers: Map<String, String> = emptyMap(),
-) : java.io.Serializable {
-    constructor(
-        name: String,
-        url: String,
-        canPaginate: Boolean,
-        image: String? = null,
-        providerId: String,
-    ) : this(
-        name = name,
-        url = url,
-        canPaginate = canPaginate,
-        image = image,
-        providerId = providerId,
-        description = "",
-        headers = emptyMap(),
-    )
-}
+) : java.io.Serializable
