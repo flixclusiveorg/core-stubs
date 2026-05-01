@@ -1,12 +1,8 @@
 package com.flixclusive.model.film
 
-import com.flixclusive.model.film.FilmIdSource.IMDB
-import com.flixclusive.model.film.FilmIdSource.TMDB
 import com.flixclusive.model.film.common.details.Company
 import com.flixclusive.model.film.util.DateAsLongSerializer
 import com.flixclusive.model.film.util.FilmType
-import com.flixclusive.model.film.util.dateFromYear
-import com.flixclusive.model.film.util.parseDate
 import kotlinx.serialization.Serializable
 import java.util.Date
 
@@ -19,7 +15,6 @@ import java.util.Date
  * @property homePage The home page of the TV show.
  * @property posterImage The poster image of the TV show.
  * @property backdropImage The backdrop image of the TV show.
- * @property tmdbId The TMDB ID of the TV show.
  * @property rating The rating of the TV show.
  * @property language The language of the TV show.
  * @property adult Whether the TV show is marked as adult.
@@ -32,7 +27,6 @@ import java.util.Date
  * @property collection The movies collection this movie belongs to.
  * @property runtime The runtime of the TV show.
  * @property filmType The type of the TV show.
- * @property imdbId The IMDB ID of the TV show.
  * @property cast The cast of the TV show.
  * @property recommendations The recommendations of the TV show.
  * @property customProperties A map of custom properties associated with the film. Add any properties that your response/resource needs. Also, serialize the value of the property to string.
@@ -45,104 +39,27 @@ import java.util.Date
 data class Movie(
     override val id: String,
     override val title: String,
+    override val providerId: String,
     override val posterImage: String?,
     override val homePage: String?,
+    override val adult: Boolean = false,
+    override val externalIds: Map<FilmIdSource, String> = emptyMap(),
+    override val customProperties: Map<String, String?> = emptyMap(),
+    override val producers: List<Company> = emptyList(),
+    override val recommendations: List<FilmSearchItem> = emptyList(),
+    override val genres: List<Genre> = emptyList(),
+    override val cast: List<Person> = emptyList(),
     override val backdropImage: String? = null,
     override val logoImage: String? = null,
-    override val externalIds: Map<FilmIdSource, String> = emptyMap(),
     override val language: String? = null,
     @Serializable(DateAsLongSerializer::class) override val releaseDate: Date? = null,
     override val rating: Double? = null,
-    override val producers: List<Company> = emptyList(),
-    override val recommendations: List<FilmSearchItem> = emptyList(),
-    override val providerId: String,
-    override val adult: Boolean = false,
     override val runtime: Int? = null,
     override val overview: String? = null,
     override val tagLine: String? = null,
-    override val genres: List<Genre> = emptyList(),
-    override val cast: List<Person> = emptyList(),
-    override val customProperties: Map<String, String?> = emptyMap(),
-
-    // == Custom fields ==
-    /** The movies collection this movie belongs to. */
-    val collection: TMDBCollection? = null,
+    val collection: FilmCollection? = null,
 ) : FilmMetadata() {
-
-    @Deprecated(
-        message = "Use sourceIds[FilmIdSource.TMDB]?.toIntOrNull() instead.",
-        replaceWith = ReplaceWith("sourceIds[FilmIdSource.TMDB]?.toIntOrNull()"),
-    )
-    override val tmdbId: Int?
-        get() = externalIds[TMDB]?.toIntOrNull()
-
-    @Deprecated(
-        message = "Use sourceIds[FilmIdSource.IMDB] instead.",
-        replaceWith = ReplaceWith("sourceIds[FilmIdSource.IMDB]"),
-    )
-    override val imdbId: String?
-        get() = externalIds[IMDB]
-
-    @Deprecated(
-        message = "Legacy constructor without sourceIds is deprecated. Use sourceIds and Date releaseDate instead.",
-        replaceWith = ReplaceWith(
-            "Movie(id, title, posterImage, homePage, backdropImage, logoImage, sourceIds, language = language, releaseDate = releaseDate, rating = rating, producers = producers, recommendations = recommendations, providerId = providerId, adult = adult, runtime = runtime, overview = overview, tagLine = tagLine, genres = genres, cast = cast, customProperties = customProperties, collection = collection)"
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    constructor(
-        id: String,
-        title: String,
-        posterImage: String?,
-        homePage: String?,
-        backdropImage: String? = null,
-        logoImage: String? = null,
-        tmdbId: Int? = null,
-        imdbId: String? = null,
-        language: String? = null,
-        releaseDate: String? = null,
-        rating: Double? = null,
-        producers: List<Company> = emptyList(),
-        recommendations: List<FilmSearchItem> = emptyList(),
-        providerId: String,
-        adult: Boolean = false,
-        runtime: Int? = null,
-        overview: String? = null,
-        tagLine: String? = null,
-        year: Int? = null,
-        genres: List<Genre> = emptyList(),
-        cast: List<Person> = emptyList(),
-        customProperties: Map<String, String?> = emptyMap(),
-        collection: TMDBCollection? = null,
-    ) : this(
-        id = id,
-        title = title,
-        posterImage = posterImage,
-        homePage = homePage,
-        backdropImage = backdropImage,
-        logoImage = logoImage,
-        externalIds = buildMap {
-            tmdbId?.let { put(TMDB, it.toString()) }
-            imdbId?.let { put(IMDB, it) }
-        },
-        language = language,
-        releaseDate = parseDate(releaseDate) ?: year?.let(::dateFromYear),
-        rating = rating,
-        producers = producers,
-        recommendations = recommendations,
-        providerId = providerId,
-        adult = adult,
-        runtime = runtime,
-        overview = overview,
-        tagLine = tagLine,
-        genres = genres,
-        cast = cast,
-        customProperties = customProperties,
-        collection = collection,
-    )
-
-    override val filmType: FilmType
-        get() = FilmType.MOVIE
+    override val filmType: FilmType get() = FilmType.MOVIE
 }
 
 
