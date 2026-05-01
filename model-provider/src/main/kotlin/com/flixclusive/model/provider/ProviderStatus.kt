@@ -15,5 +15,11 @@ enum class ProviderStatus {
     Beta,
 
     /** Indicates that the provider is working without issues. */
-    Working
+    Working;
+
+    override fun toString(): String {
+        return super.toString().lowercase()
+    }
+
+    val isWorking: Boolean get() = this == Working || this == Beta
 }
