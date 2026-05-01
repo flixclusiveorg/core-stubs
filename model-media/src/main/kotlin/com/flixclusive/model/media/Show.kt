@@ -4,6 +4,7 @@ import com.flixclusive.model.media.common.Cast
 import com.flixclusive.model.media.common.Company
 import com.flixclusive.model.media.common.Genre
 import com.flixclusive.model.media.common.MediaIdSource
+import com.flixclusive.model.media.common.MediaType
 import com.flixclusive.model.media.common.tv.Episode
 import com.flixclusive.model.media.common.tv.Season
 import kotlinx.serialization.Serializable
@@ -63,6 +64,8 @@ data class Show(
     val totalSeasons: Int,
     val lastAirDate: Long? = null,
 ) : MediaMetadata {
+    override val type: MediaType get() = MediaType.SHOW
+
     private val seasonMap by lazy {
         seasons.associateBy { it.number }
     }

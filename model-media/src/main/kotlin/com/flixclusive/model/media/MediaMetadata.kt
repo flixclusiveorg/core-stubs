@@ -3,6 +3,7 @@ package com.flixclusive.model.media
 import com.flixclusive.model.media.common.Cast
 import com.flixclusive.model.media.common.Genre
 import com.flixclusive.model.media.common.MediaIdSource
+import com.flixclusive.model.media.common.MediaType
 import com.flixclusive.model.media.util.isDateInFuture
 
 /**
@@ -49,6 +50,12 @@ enum class MediaReleaseStatus {
  * @property logoImage The URL to the logo image of the media (movie/shows) (optional).
  * @property releaseDate The release date of the media (movie/shows).
  * @property releaseStatus The release status of the media (movie/shows). See [MediaReleaseStatus].
+ * @property casts A list of cast members associated with the media (movie/shows).
+ * @property certification The certification of the media (movie/shows) (optional).
+ * @property tagLine The tag line of the media (movie/shows) (optional).
+ * @property isMovie Indicates whether the media is a movie.
+ * @property isShow Indicates whether the media is a show.
+ * @property type The type of the media (movie/shows).
  * @property customProperties A map of custom properties associated with the media (movie/shows). Add any properties that your response/resource needs. Also, serialize the value of the property to string.
  */
 interface MediaMetadata : java.io.Serializable {
@@ -63,6 +70,7 @@ interface MediaMetadata : java.io.Serializable {
     val posterImage: String?
     val genres: List<Genre>
     val releaseDate: Long?
+    val type: MediaType
     
     val customProperties: Map<String, String?> get() = emptyMap()
     val externalIds: Map<MediaIdSource, String> get() = emptyMap()
@@ -90,6 +98,6 @@ interface MediaMetadata : java.io.Serializable {
         }
 
 
-    val isMovie get() = this is Movie
-    val isShow get() = this is Show
+    val isMovie get() = this is Movie || type.isMovie
+    val isShow get() = this is Show || type.isMovie
 }
