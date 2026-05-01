@@ -36,8 +36,8 @@ data class ProviderMetadata(
     val changelog: String? = null,
     // ==================== \\
     val name: String,
-    val language: Language,
-    val providerType: ProviderType,
+    @Serializable(with = LanguageSerializer::class) val language: Language,
+    @Serializable(with = ProviderTypeSerializer::class) val providerType: ProviderType,
     val status: ProviderStatus,
     val description: String? = null,
     val iconUrl: String? = null,
