@@ -99,5 +99,5 @@ interface MediaMetadata : java.io.Serializable {
 
 
     val isMovie get() = this is Movie || type.isMovie
-    val isShow get() = this is Show || type.isMovie
+    val isShow get() = this is Show || type.isShow
 }
