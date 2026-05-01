@@ -7,6 +7,10 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable(with = ProviderTypeSerializer::class)
 data class ProviderType(val type: String) {
@@ -45,6 +49,15 @@ internal object ProviderTypeSerializer : KSerializer<ProviderType> {
     }
 
     override fun deserialize(decoder: Decoder): ProviderType {
-        return ProviderType(decoder.decodeString())
+        val jsonDecoder = decoder as? JsonDecoder
+            ?: error("ProviderTypeSerializer only works with JSON")
+
+        val type = when (val element = jsonDecoder.decodeJsonElement()) {
+            is JsonPrimitive -> element.content
+            is JsonObject -> element["type"]?.jsonPrimitive?.content
+            else -> null
+        } ?: "Unknown"
+
+        return ProviderType(type)
     }
 }
