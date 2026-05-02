@@ -44,6 +44,11 @@ interface TrackerProviderApi {
 	 */
 	suspend fun getLists(): List<TrackerList>
 
+	/**
+	 * Returns the authenticated user's list with the given id, or null if not found.
+	 */
+	suspend fun getList(id: String): TrackerList
+
 	/** Creates a new list remotely. */
 	suspend fun createList(
 		name: String,
@@ -62,6 +67,7 @@ interface TrackerProviderApi {
 	suspend fun getListItems(
 		list: TrackerList,
 		page: Int = 1,
+		pageSize: Int = 20,
 	): PaginatedMedia<MediaMetadata>
 
 	/** Adds a single item to the given list remotely. */
