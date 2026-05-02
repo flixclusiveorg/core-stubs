@@ -44,7 +44,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getCatalogApi(context: Context): CatalogProviderApi? =
+    open suspend fun getCatalogApi(context: Context): CatalogProviderApi? =
         null
 
     /**
@@ -53,7 +53,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getSearchApi(context: Context): SearchProviderApi? =
+    open suspend fun getSearchApi(context: Context): SearchProviderApi? =
         null
 
     /**
@@ -62,7 +62,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getMetadataApi(context: Context): MediaMetadataProviderApi? =
+    open suspend fun getMetadataApi(context: Context): MediaMetadataProviderApi? =
         null
 
     /**
@@ -71,7 +71,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getCrossMatchApi(context: Context): CrossMatchProviderApi? =
+    open suspend fun getCrossMatchApi(context: Context): CrossMatchProviderApi? =
         null
 
     /**
@@ -80,7 +80,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getMediaLinkApi(context: Context): MediaLinkProviderApi? =
+    open suspend fun getMediaLinkApi(context: Context): MediaLinkProviderApi? =
         null
 
     /**
@@ -89,7 +89,7 @@ abstract class ProviderPlugin {
      * Override this to expose a dedicated component-based implementation.
      */
     @Throws(Throwable::class)
-    open fun getTrackerApi(context: Context): TrackerProviderApi? =
+    open suspend fun getTrackerApi(context: Context): TrackerProviderApi? =
         null
 
     /**
@@ -97,9 +97,7 @@ abstract class ProviderPlugin {
      * @param context Context
      */
     @Throws(Throwable::class)
-    open suspend fun onUnload(context: Context?) {
-
-    }
+    open suspend fun onUnload(context: Context?) = Unit
 
     /**
      *
