@@ -30,4 +30,4 @@ data class TrackerList(
     val createdAt: Long? = null,
     val updatedAt: Long? = null,
     val images: List<String> = emptyList(),
-)
+) : java.io.Serializable
