@@ -98,4 +98,18 @@ interface TrackerProviderApi {
 		atMs: Long? = null,
 		episode: Episode? = null,
 	)
+
+	/**
+	 * Returns the last scrobbled progress for the given item, or null if no scrobble data is available.
+	 * The progress is returned as a percentage in the range 0..100.
+	 *
+	 * @param item The media item for which to retrieve scrobble progress.
+	 * @param episode Optional episode parameter for TV shows, required if the provider tracks scrobble progress at the episode level.
+	 *
+	 * @return The last scrobbled progress percentage (0..100) for the given item, or null if no scrobble data is available.
+	 */
+	suspend fun getScrobbledProgress(
+		item: MediaMetadata,
+		episode: Episode? = null,
+	): Float
 }
