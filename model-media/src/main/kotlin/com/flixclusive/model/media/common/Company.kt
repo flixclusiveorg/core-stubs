@@ -13,4 +13,4 @@ import kotlinx.serialization.Serializable
 data class Company(
     val name: String,
     val catalog: Catalog? = null,
-)
+) : java.io.Serializable

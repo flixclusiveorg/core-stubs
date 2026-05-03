@@ -16,4 +16,4 @@ data class Cast(
     val biography: String? = null,
     val character: String? = null,
     val profileImage: String? = null
-)
+) : java.io.Serializable

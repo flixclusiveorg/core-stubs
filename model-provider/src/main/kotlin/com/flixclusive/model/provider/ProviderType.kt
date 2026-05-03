@@ -13,7 +13,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable(with = ProviderTypeSerializer::class)
-data class ProviderType(val type: String) {
+data class ProviderType(val type: String) : java.io.Serializable {
     companion object {
         /** Quick instance of [ProviderType] for providers that provide all content. */
         val All = ProviderType("Movies, TV Shows, etc.")

@@ -15,4 +15,4 @@ import kotlinx.serialization.Serializable
 data class Genre(
     val name: String,
     val catalog: Catalog? = null,
-)
+) : java.io.Serializable

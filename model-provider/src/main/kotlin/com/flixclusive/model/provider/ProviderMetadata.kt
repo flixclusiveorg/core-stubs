@@ -42,4 +42,4 @@ data class ProviderMetadata(
     val description: String? = null,
     val iconUrl: String? = null,
     val adult: Boolean = false,
-)
+) : java.io.Serializable

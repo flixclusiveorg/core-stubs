@@ -21,7 +21,7 @@ import kotlinx.serialization.json.jsonPrimitive
  * @see Multiple
  */
 @Serializable(with = LanguageSerializer::class)
-data class Language(val code: String) {
+data class Language(val code: String) : java.io.Serializable {
     companion object {
         /** Quick instance of [Language] for providers with multiple languages. */
         val Multiple = Language("Multiple")

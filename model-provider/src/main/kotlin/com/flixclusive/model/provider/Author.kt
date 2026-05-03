@@ -14,4 +14,4 @@ data class Author(
     val name: String,
     val image: String? = null,
     val socialLink: String? = null,
-)
+) : java.io.Serializable
