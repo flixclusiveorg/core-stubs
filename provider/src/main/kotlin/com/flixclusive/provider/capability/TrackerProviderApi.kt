@@ -37,7 +37,10 @@ interface TrackerProviderApi {
 	suspend fun isAuthenticated(): Boolean
 
 	/** Returns whether the given item exists in any of the authenticated user's lists. */
-	suspend fun isInAnyList(item: MediaMetadata): Boolean
+	suspend fun isInList(
+		list: TrackerList,
+		item: MediaMetadata
+	): Boolean
 
 	/**
 	 * Returns the authenticated user's lists.
