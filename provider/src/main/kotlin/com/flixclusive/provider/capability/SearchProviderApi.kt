@@ -12,7 +12,7 @@ interface SearchProviderApi {
      * Canonical search API.
      */
     suspend fun search(
-        title: String,
+        query: String,
         page: Int = 1,
         filters: FilterList = this.filters,
     ): PaginatedMedia<PartialMedia>
