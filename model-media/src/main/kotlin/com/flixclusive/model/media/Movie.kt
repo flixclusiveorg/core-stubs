@@ -60,6 +60,23 @@ data class Movie(
     val collection: MovieCollection? = null,
 ) : MediaMetadata {
     override val type: MediaType get() = MediaType.MOVIE
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Movie) return false
+
+        if (id != other.id) return false
+        if (providerId != other.providerId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + providerId.hashCode()
+        return result
+    }
+
 }
 
 

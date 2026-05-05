@@ -66,6 +66,23 @@ data class Show(
 ) : MediaMetadata {
     override val type: MediaType get() = MediaType.SHOW
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Show) return false
+
+        if (id != other.id) return false
+        if (providerId != other.providerId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + providerId.hashCode()
+        return result
+    }
+
+
     private val seasonMap by lazy {
         seasons.associateBy { it.number }
     }

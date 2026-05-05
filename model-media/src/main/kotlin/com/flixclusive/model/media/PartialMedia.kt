@@ -24,4 +24,22 @@ data class PartialMedia(
     override val language: String? = null,
     override val overview: String? = null,
     override val certification: String? = null,
-) : MediaMetadata
+) : MediaMetadata {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PartialMedia) return false
+
+        if (type != other.type) return false
+        if (id != other.id) return false
+        if (providerId != other.providerId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + id.hashCode()
+        result = 31 * result + providerId.hashCode()
+        return result
+    }
+}
