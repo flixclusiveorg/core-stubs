@@ -97,7 +97,7 @@ abstract class ProviderPlugin {
      * @param context Context
      */
     @Throws(Throwable::class)
-    open suspend fun onUnload(context: Context?) = Unit
+    open suspend fun onUnload(context: Context) = Unit
 
     /**
      *
