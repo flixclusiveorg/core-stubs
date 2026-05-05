@@ -33,15 +33,11 @@ sealed class Flag {
      * Indicates that the media link redirects/handoffs to another streaming site.
      *
      * @property name Human-readable gateway name.
-     * @property url Destination URL.
      * @property logo Optional logo/icon URL.
-     * @property description Optional short description for UI.
      */
     data class ThirdPartyGateway(
         val name: String,
-        val url: String,
         val logo: String? = null,
-        val description: String? = null,
     ) : Flag()
 }
 
