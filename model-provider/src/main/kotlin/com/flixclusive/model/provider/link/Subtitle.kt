@@ -32,7 +32,10 @@ data class Subtitle(
         return try {
             other is String &&
             (url.equals(other, true) ||
-            url.contains(other, true))
+            url.contains(other, true)) ||
+            (other is Subtitle
+                && url.equals(other.url, true)
+                && language.equals(other.language, true))
         } catch (_: Exception) {
             super.equals(other)
         }
