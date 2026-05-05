@@ -43,12 +43,12 @@ inline fun <reified T> fromJson(reader: Reader): T =
 /**
  * Parses the specified [JsonElement] into an object of type [T].
  *
- * @param json The [JsonElement] to parse.
+ * @param element The [JsonElement] to parse.
  * @return The parsed object of type [T].
  * @throws [SerializationException] if the element cannot be parsed into the specified type.
  */
-inline fun <reified T> fromJson(json: JsonElement): T =
-    AppJson.decodeFromJsonElement(json)
+inline fun <reified T> fromJson(element: JsonElement): T =
+    AppJson.decodeFromJsonElement(element)
 
 /**
  * Parses the specified JSON string into an object of type [T] using a custom [KSerializer].
