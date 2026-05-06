@@ -32,7 +32,7 @@ data class Language(val code: String) : java.io.Serializable {
     }
 }
 
-internal object LanguageSerializer : KSerializer<Language> {
+object LanguageSerializer : KSerializer<Language> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Language", PrimitiveKind.STRING)
 

@@ -40,7 +40,7 @@ data class ProviderType(val type: String) : java.io.Serializable {
     override fun toString(): String = type
 }
 
-internal object ProviderTypeSerializer : KSerializer<ProviderType> {
+object ProviderTypeSerializer : KSerializer<ProviderType> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("ProviderType", PrimitiveKind.STRING)
 

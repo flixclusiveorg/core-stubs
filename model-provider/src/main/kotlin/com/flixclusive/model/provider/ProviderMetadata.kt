@@ -2,6 +2,8 @@ package com.flixclusive.model.provider
 
 import kotlinx.serialization.Serializable
 
+// TODO: Add branchs property here or ProviderManifest?
+
 /**
  * Represents the data associated with a provider.
  *
