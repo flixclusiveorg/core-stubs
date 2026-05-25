@@ -20,19 +20,16 @@ import com.flixclusive.provider.capability.TrackerProviderApi
  * @property name The name of the provider.
  * @property manifest A [ProviderManifest] instance that contains the provider's information.
  * @property resources A [Resources] instance that is used to hold all of the app's resources.
- * @property __filename The filename of the provider.
  *
- * @property settings A [DataStore] of [Preferences] that holds the provider's settings/preferences.
+ * @property settings A [DataStore] instance that holds the provider's settings/preferences.
  *
  * Provider API instances should be managed through your own dependency injection (or equivalent caching)
  * strategy. Capability getters should return stable, reusable API components.
  * */
-@Suppress("PropertyName", "MemberVisibilityCanBePrivate")
 abstract class ProviderPlugin {
     open val name: String get() = manifest.name
     val id: String get() = manifest.id
 
-    lateinit var __filename: String
     lateinit var manifest: ProviderManifest
     lateinit var settings: DataStore<Preferences>
 

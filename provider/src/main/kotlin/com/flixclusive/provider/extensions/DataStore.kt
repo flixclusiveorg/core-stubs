@@ -1,4 +1,4 @@
-package com.flixclusive.provider.settings
+package com.flixclusive.provider.extensions
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -10,7 +10,10 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.flixclusive.core.util.network.json.AppJson
 import com.flixclusive.core.util.network.json.fromJson
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
 /**
  * Clears all stored preferences.
@@ -228,3 +231,68 @@ suspend inline fun <reified T : Any> DataStore<Preferences>.setUnknown(
     is Int -> setInt(key, value)
     else -> setObject(key, value)
 }
+
+// ─── Flow variants ────────────────────────────────────────────────────────────
+
+/**
+ * Returns a [Flow] that emits the current [Boolean] for [key] and re-emits on every change.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent.
+ */
+fun DataStore<Preferences>.getBoolAsFlow(key: String, defValue: Boolean): Flow<Boolean> =
+    data.map { it[booleanPreferencesKey(key)] ?: defValue }.distinctUntilChanged()
+
+/**
+ * Returns a [Flow] that emits the current [Int] for [key] and re-emits on every change.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent.
+ */
+fun DataStore<Preferences>.getIntAsFlow(key: String, defValue: Int): Flow<Int> =
+    data.map { it[intPreferencesKey(key)] ?: defValue }.distinctUntilChanged()
+
+/**
+ * Returns a [Flow] that emits the current [Float] for [key] and re-emits on every change.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent.
+ */
+fun DataStore<Preferences>.getFloatAsFlow(key: String, defValue: Float): Flow<Float> =
+    data.map { it[floatPreferencesKey(key)] ?: defValue }.distinctUntilChanged()
+
+/**
+ * Returns a [Flow] that emits the current [Long] for [key] and re-emits on every change.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent.
+ */
+fun DataStore<Preferences>.getLongAsFlow(key: String, defValue: Long): Flow<Long> =
+    data.map { it[longPreferencesKey(key)] ?: defValue }.distinctUntilChanged()
+
+/**
+ * Returns a [Flow] that emits the current [String] for [key] and re-emits on every change.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent.
+ */
+fun DataStore<Preferences>.getStringAsFlow(key: String, defValue: String? = null): Flow<String?> =
+    data.map { it[stringPreferencesKey(key)] ?: defValue }.distinctUntilChanged()
+
+/**
+ * Returns a [Flow] that emits the current JSON-deserialized [T] for [key] and re-emits on every change.
+ *
+ * The type [T] must be annotated with `@Serializable`.
+ *
+ * @param key Preference key name.
+ * @param defValue Fallback emitted when the key is absent or deserialisation fails.
+ */
+inline fun <reified T> DataStore<Preferences>.getObjectAsFlow(
+    key: String,
+    defValue: T? = null,
+): Flow<T?> = data.map { prefs ->
+    runCatching {
+        val raw = prefs[stringPreferencesKey(key)] ?: return@map defValue
+        fromJson<T>(raw)
+    }.getOrDefault(defValue)
+}.distinctUntilChanged()

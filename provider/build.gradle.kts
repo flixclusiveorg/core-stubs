@@ -14,6 +14,7 @@ dependencies {
     api(projects.modelProvider)
     api(projects.modelMedia)
 
+    compileOnly(libs.kotlinx.coroutines)
     compileOnly(libs.compose.runtime)
     compileOnly(libs.compose.ui)
     compileOnly(libs.core.ktx)
