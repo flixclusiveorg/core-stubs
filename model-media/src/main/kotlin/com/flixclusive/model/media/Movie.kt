@@ -99,6 +99,6 @@ data class MovieCollection(
     val posterImage: String?,
     val backdropImage: String? = null,
     val overview: String? = null,
-)
+) : java.io.Serializable
 
 
