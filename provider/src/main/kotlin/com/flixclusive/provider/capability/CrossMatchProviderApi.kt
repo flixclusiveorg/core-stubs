@@ -2,6 +2,7 @@ package com.flixclusive.provider.capability
 
 import com.flixclusive.model.media.MediaMetadata
 import com.flixclusive.model.media.common.MediaIdSource
+import com.flixclusive.model.media.common.MediaType
 
 /** Capability contract for cross-provider metadata matching. */
 interface CrossMatchProviderApi {
@@ -12,6 +13,7 @@ interface CrossMatchProviderApi {
      * otherwise null.
      */
     suspend fun getById(
+        mediaType: MediaType,
         sourceIds: Map<MediaIdSource, String>,
     ): MediaMetadata?
 

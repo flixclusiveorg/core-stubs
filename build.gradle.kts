@@ -37,7 +37,7 @@ subprojects {
     apply(plugin = "org.jetbrains.dokka")
 
     group = "com.github.flixclusive"
-    version = "1.3.1"
+    version = "1.4.0"
 
     afterEvaluate {
         publishing {

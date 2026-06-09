@@ -90,11 +90,9 @@ data class Show(
     /**
      * Retrieves a season by its number.
      *
-     * Does a binary search on the seasons list, so it will sort the seasons by
-     * number on the first calland cache the sorted list for subsequent calls.
-     *
      * @param number The season number to retrieve.
-     * @return The season with the specified number, or null if not found.
+     * @return The [Season] with the specified number, or null if not found.
+     * The returned value may be a [Season.Partial] or [Season.Full] depending on what the provider populated.
      * */
     fun getSeason(number: Int): Season? {
         return seasonMap[number]
@@ -103,25 +101,16 @@ data class Show(
     /**
      * Retrieves an episode by its season and episode number.
      *
+     * Returns null if the season is not found or if it is a [Season.Partial] (episodes not yet loaded).
+     * In the latter case, call `MediaMetadataProviderApi.getSeason()` first to obtain a [Season.Full].
+     *
      * @param season The season number of the episode to retrieve.
      * @param episode The episode number to retrieve.
      *
      * @return The episode with the specified season and episode number, or null if not found
      * */
     fun getEpisode(season: Int, episode: Int): Episode? {
-        return seasonMap[season]?.getEpisode(episode)
-    }
-
-    /**
-     * Retrieves an episode by its season and episode number.
-     *
-     * @param season The season of the episode to retrieve.
-     * @param episode The episode number to retrieve.
-     *
-     * @return The episode with the specified season and episode number, or null if not found
-     * */
-    fun getEpisode(season: Season, episode: Int): Episode? {
-        return getEpisode(season.number, episode)
+        return (seasonMap[season] as? Season.Full)?.getEpisode(episode)
     }
 
 }
